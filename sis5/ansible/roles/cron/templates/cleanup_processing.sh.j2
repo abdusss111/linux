@@ -1,0 +1,17 @@
+#!/bin/bash
+# Clean old processing files script
+# Runs daily at 4:30 AM
+
+set -e
+
+PROCESSING_DIR="{{ project_data }}/processing"
+DAYS_OLD=3
+
+# Remove processing files older than specified days
+find "$PROCESSING_DIR" -type f -mtime +$DAYS_OLD -delete 2>/dev/null || true
+
+# Remove empty directories
+find "$PROCESSING_DIR" -type d -empty -delete 2>/dev/null || true
+
+echo "Processing cleanup completed: removed files older than $DAYS_OLD days"
+

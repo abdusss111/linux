@@ -1,0 +1,26 @@
+#!/bin/bash
+# SSL certificate renewal check script
+# Runs weekly on Mondays at 6:00 AM
+
+set -e
+
+SSL_DIR="{{ project_config }}/ssl"
+DOMAIN="{{ domain_name }}"
+DAYS_WARNING=30
+
+if [ -f "$SSL_DIR/fullchain.pem" ]; then
+    EXPIRY=$(openssl x509 -enddate -noout -in "$SSL_DIR/fullchain.pem" | cut -d= -f2)
+    EXPIRY_EPOCH=$(date -d "$EXPIRY" +%s)
+    NOW_EPOCH=$(date +%s)
+    DAYS_LEFT=$(( (EXPIRY_EPOCH - NOW_EPOCH) / 86400 ))
+    
+    if [ $DAYS_LEFT -lt $DAYS_WARNING ]; then
+        echo "WARNING: SSL certificate expires in $DAYS_LEFT days!"
+        # Add notification logic here
+    else
+        echo "SSL certificate OK: $DAYS_LEFT days remaining"
+    fi
+else
+    echo "No SSL certificate found at $SSL_DIR/fullchain.pem"
+fi
+

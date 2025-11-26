@@ -1,0 +1,29 @@
+#!/bin/bash
+# Backend logs rotation script
+# Runs weekly on Sundays at 5:00 AM
+
+set -e
+
+LOG_DIR="{{ project_logs }}"
+MAX_SIZE=100M
+ROTATE_COUNT=5
+
+# Rotate logs using logrotate
+cat > /tmp/dapmeet-logrotate.conf << EOF
+$LOG_DIR/*.log {
+    size $MAX_SIZE
+    rotate $ROTATE_COUNT
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 640 root dapmeet
+}
+EOF
+
+/usr/sbin/logrotate -f /tmp/dapmeet-logrotate.conf
+
+rm -f /tmp/dapmeet-logrotate.conf
+
+echo "Backend logs rotation completed"
+

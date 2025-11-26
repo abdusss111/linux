@@ -1,0 +1,27 @@
+---
+# Role: services
+# Purpose: Create systemd services as defined in SIS4
+
+- name: Create systemd service for Docker container
+  ansible.builtin.template:
+    src: docker-container.service.j2
+    dest: "/etc/systemd/system/{{ docker_container.name }}.service"
+    mode: "0644"
+  notify:
+    - Reload systemd
+    - Restart container service
+  tags: [services, systemd]
+
+- name: Enable container service
+  ansible.builtin.systemd:
+    name: "{{ docker_container.name }}"
+    enabled: true
+    daemon_reload: true
+  tags: [services, systemd]
+
+- name: Ensure container service is running
+  ansible.builtin.systemd:
+    name: "{{ docker_container.name }}"
+    state: started
+  tags: [services, systemd]
+

@@ -1,0 +1,163 @@
+---
+# VM1 - Frontend specific variables
+
+vm_role: frontend
+
+# Groups specific to VM1
+vm_groups:
+  - name: www-data
+    gid: 33
+  - name: deployer
+    gid: 2010
+
+# Users specific to VM1
+vm_users:
+  - name: nginx
+    uid: 1001
+    group: www-data
+    groups: []
+    shell: /usr/sbin/nologin
+    system: true
+    home: /var/cache/nginx
+    comment: "Nginx web server"
+
+  - name: deployer
+    uid: 1010
+    group: deployer
+    groups: [dapmeet]
+    shell: /bin/bash
+    system: false
+    home: /home/deployer
+    comment: "Deployment specialist"
+    ssh_key: true
+
+  - name: sysadmin
+    uid: 1020
+    group: sysadmin
+    groups: [sudo]
+    shell: /bin/bash
+    system: false
+    home: /home/sysadmin
+    comment: "System administrator"
+    ssh_key: true
+
+  - name: devops_user
+    uid: 1021
+    group: devops
+    groups: [dapmeet, docker]
+    shell: /bin/bash
+    system: false
+    home: /home/devops_user
+    comment: "DevOps engineer"
+    ssh_key: true
+
+  - name: automation
+    uid: 1030
+    group: automation
+    groups: [dapmeet]
+    shell: /bin/bash
+    system: false
+    home: /home/automation
+    comment: "CI/CD automation bot"
+    ssh_key: true
+
+  - name: monitoring
+    uid: 1040
+    group: monitoring
+    groups: []
+    shell: /bin/bash
+    system: false
+    home: /home/monitoring
+    comment: "System monitoring"
+    ssh_key: false
+
+  - name: auditor
+    uid: 1050
+    group: auditor
+    groups: []
+    shell: /bin/bash
+    system: false
+    home: /home/auditor
+    comment: "Security auditor"
+    ssh_key: true
+
+# Directories for VM1
+vm_directories:
+  - path: "{{ project_base }}/frontend"
+    owner: deployer
+    group: dapmeet
+    mode: "0755"
+  - path: "{{ project_logs }}"
+    owner: root
+    group: dapmeet
+    mode: "0755"
+  - path: "{{ project_config }}/nginx"
+    owner: root
+    group: www-data
+    mode: "0750"
+  - path: "{{ project_config }}/ssl"
+    owner: root
+    group: www-data
+    mode: "0750"
+  - path: /var/www/dapmeet/static
+    owner: nginx
+    group: www-data
+    mode: "0755"
+
+# Firewall ports for VM1
+firewall_ports:
+  - port: 22
+    proto: tcp
+    comment: "SSH"
+  - port: 80
+    proto: tcp
+    comment: "HTTP"
+  - port: 443
+    proto: tcp
+    comment: "HTTPS"
+
+# Sudoers rules for VM1
+sudoers_rules:
+  - filename: devops
+    content: |
+      %devops ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx
+      %devops ALL=(ALL) NOPASSWD: /usr/bin/systemctl status nginx
+      %devops ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload nginx
+      %devops ALL=(ALL) NOPASSWD: /usr/sbin/nginx -t
+
+  - filename: deployer
+    content: |
+      deployer ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload nginx
+      deployer ALL=(ALL) NOPASSWD: /usr/bin/npm *
+      deployer ALL=(ALL) NOPASSWD: /usr/bin/docker *
+
+  - filename: monitoring
+    content: |
+      monitoring ALL=(ALL) NOPASSWD: /usr/bin/systemctl status *
+      monitoring ALL=(ALL) NOPASSWD: /usr/bin/journalctl *
+
+# Docker container for VM1
+docker_container:
+  name: dapmeet-frontend
+  image: "{{ frontend_image }}"
+  ports:
+    - "3000:3000"
+  env:
+    NODE_ENV: production
+  restart_policy: always
+
+# Cron jobs for VM1
+cron_jobs:
+  - name: "Frontend logs backup"
+    job: "/opt/dapmeet/scripts/backup_frontend_logs.sh"
+    minute: "0"
+    hour: "2"
+    user: root
+
+  - name: "SSL certificate renewal check"
+    job: "/opt/dapmeet/scripts/check_ssl_renewal.sh"
+    minute: "0"
+    hour: "6"
+    weekday: "1"
+    user: root
+

@@ -1,0 +1,51 @@
+---
+# Role: firewall
+# Purpose: Configure UFW firewall (SIS3 - Networking)
+
+- name: Install UFW
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+    update_cache: true
+  tags: [firewall]
+
+- name: Set UFW default deny incoming
+  community.general.ufw:
+    direction: incoming
+    default: deny
+  tags: [firewall]
+
+- name: Set UFW default allow outgoing
+  community.general.ufw:
+    direction: outgoing
+    default: allow
+  tags: [firewall]
+
+- name: Allow configured ports
+  community.general.ufw:
+    rule: allow
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+    comment: "{{ item.comment }}"
+  loop: "{{ firewall_ports }}"
+  tags: [firewall]
+
+- name: Allow SSH from specific networks (internal)
+  community.general.ufw:
+    rule: allow
+    port: 22
+    proto: tcp
+    src: 192.168.0.0/16
+    comment: "SSH from internal network"
+  tags: [firewall]
+
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+  tags: [firewall]
+
+- name: Enable UFW logging
+  community.general.ufw:
+    logging: "on"
+  tags: [firewall]
+

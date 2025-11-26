@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Abdurakhimov Abdussalam
+  description: Configure cron jobs for Dapmeet project
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+
+dependencies:
+  - role: permissions
+

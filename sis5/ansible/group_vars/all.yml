@@ -1,0 +1,36 @@
+---
+# Global variables for Dapmeet project
+
+# Project paths
+project_base: /opt/dapmeet
+project_logs: /var/log/dapmeet
+project_data: /var/dapmeet
+project_backups: /var/backups/dapmeet
+project_config: /etc/dapmeet
+
+# Docker settings
+docker_hub_user: abdusss111
+frontend_image: "{{ docker_hub_user }}/dapmeet-client:latest"
+backend_image: "{{ docker_hub_user }}/dapmeet-service:latest"
+
+# PostgreSQL settings
+postgres_version: "14"
+postgres_data_dir: "/var/lib/postgresql/{{ postgres_version }}/main"
+postgres_config_dir: "/etc/postgresql/{{ postgres_version }}/main"
+
+# Common groups
+common_groups:
+  - name: dapmeet
+    gid: 2000
+  - name: devops
+    gid: 2001
+  - name: automation
+    gid: 2002
+  - name: monitoring
+    gid: 2003
+  - name: auditor
+    gid: 2004
+
+# Timezone
+timezone: "UTC"
+

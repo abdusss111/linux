@@ -1,0 +1,75 @@
+---
+# Role: permissions
+# Purpose: Set up directory permissions and sudoers as defined in SIS2
+
+- name: Create project directories
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  loop: "{{ vm_directories }}"
+  tags: [permissions, directories]
+
+- name: Create scripts directory
+  ansible.builtin.file:
+    path: "{{ project_base }}/scripts"
+    state: directory
+    owner: root
+    group: dapmeet
+    mode: "0755"
+  tags: [permissions, directories]
+
+- name: Create tmp setup directory
+  ansible.builtin.file:
+    path: /tmp/dapmeet-setup
+    state: directory
+    owner: root
+    group: dapmeet
+    mode: "0775"
+  tags: [permissions, directories]
+
+- name: Protect .env files if they exist
+  ansible.builtin.file:
+    path: "{{ project_base }}/{{ vm_role }}/.env"
+    mode: "0600"
+  failed_when: false
+  changed_when: false
+  tags: [permissions, security]
+
+- name: Install sudo package
+  ansible.builtin.apt:
+    name: sudo
+    state: present
+    update_cache: true
+  tags: [permissions, sudo]
+
+- name: Create sudoers.d directory
+  ansible.builtin.file:
+    path: /etc/sudoers.d
+    state: directory
+    owner: root
+    group: root
+    mode: "0750"
+  tags: [permissions, sudo]
+
+- name: Configure sudoers rules
+  ansible.builtin.copy:
+    content: "{{ item.content }}"
+    dest: "/etc/sudoers.d/{{ item.filename }}"
+    owner: root
+    group: root
+    mode: "0440"
+    validate: /usr/sbin/visudo -cf %s
+  loop: "{{ sudoers_rules }}"
+  tags: [permissions, sudo]
+
+- name: Ensure sudoers includes sudoers.d
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    regexp: '^#includedir /etc/sudoers.d'
+    line: '#includedir /etc/sudoers.d'
+    validate: /usr/sbin/visudo -cf %s
+  tags: [permissions, sudo]
+

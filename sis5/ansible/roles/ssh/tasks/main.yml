@@ -1,0 +1,83 @@
+---
+# Role: ssh
+# Purpose: Configure SSH as defined in SIS2
+
+- name: Install OpenSSH server
+  ansible.builtin.apt:
+    name: openssh-server
+    state: present
+    update_cache: true
+  tags: [ssh]
+
+- name: Ensure SSH service is running
+  ansible.builtin.systemd:
+    name: sshd
+    state: started
+    enabled: true
+  tags: [ssh]
+
+- name: Configure SSH - Disable root login
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PermitRootLogin'
+    line: 'PermitRootLogin no'
+  notify: Restart SSH
+  tags: [ssh, security]
+
+- name: Configure SSH - Disable password authentication
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+  notify: Restart SSH
+  tags: [ssh, security]
+
+- name: Configure SSH - Enable public key authentication
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?PubkeyAuthentication'
+    line: 'PubkeyAuthentication yes'
+  notify: Restart SSH
+  tags: [ssh, security]
+
+- name: Configure SSH - Set authorized keys file
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?AuthorizedKeysFile'
+    line: 'AuthorizedKeysFile .ssh/authorized_keys'
+  notify: Restart SSH
+  tags: [ssh, security]
+
+- name: Configure SSH - Limit max auth tries
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?MaxAuthTries'
+    line: 'MaxAuthTries 3'
+  notify: Restart SSH
+  tags: [ssh, security]
+
+- name: Configure SSH - Set client alive interval
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?ClientAliveInterval'
+    line: 'ClientAliveInterval 300'
+  notify: Restart SSH
+  tags: [ssh, security]
+
+- name: Configure SSH - Allow specific users
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^#?AllowUsers'
+    line: "AllowUsers {{ vm_users | selectattr('ssh_key', 'defined') | selectattr('ssh_key', 'equalto', true) | map(attribute='name') | join(' ') }}"
+  notify: Restart SSH
+  when: vm_users | selectattr('ssh_key', 'defined') | selectattr('ssh_key', 'equalto', true) | list | length > 0
+  tags: [ssh, security]
+
+- name: Deploy SSH public keys for automation user
+  ansible.builtin.authorized_key:
+    user: automation
+    key: "{{ lookup('file', '~/.ssh/automation_key.pub', errors='ignore') | default('ssh-rsa AUTOMATION_KEY_PLACEHOLDER automation@dapmeet') }}"
+    state: present
+  failed_when: false
+  tags: [ssh, keys]
+

@@ -1,0 +1,34 @@
+---
+# VM1 Playbook: Frontend Setup Only
+# Use this to setup only the frontend VM
+
+- name: Setup VM1 - Frontend
+  hosts: frontend
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+  roles:
+    - role: users
+    - role: permissions
+    - role: ssh
+    - role: firewall
+    - role: docker
+    - role: services
+    - role: cron
+
+  post_tasks:
+    - name: Verify frontend container is running
+      ansible.builtin.command: docker ps --filter name=dapmeet-frontend --format "{{ '{{' }}.Status{{ '}}' }}"
+      register: container_status
+      changed_when: false
+
+    - name: Display frontend status
+      ansible.builtin.debug:
+        msg: "Frontend container status: {{ container_status.stdout }}"
+

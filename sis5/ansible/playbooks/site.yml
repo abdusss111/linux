@@ -1,0 +1,70 @@
+---
+# Main playbook: Complete Dapmeet infrastructure setup
+# This playbook automates the setup described in SIS 2, 3, and 4
+
+- name: Setup Dapmeet Infrastructure
+  hosts: all
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+      tags: [always]
+
+    - name: Install common packages
+      ansible.builtin.apt:
+        name:
+          - vim
+          - curl
+          - wget
+          - git
+          - htop
+          - net-tools
+          - python3
+          - python3-pip
+        state: present
+      tags: [common]
+
+    - name: Set timezone
+      ansible.builtin.timezone:
+        name: "{{ timezone }}"
+      tags: [common]
+
+  roles:
+    # SIS2: Users and Permissions
+    - role: users
+      tags: [sis2, users]
+
+    - role: permissions
+      tags: [sis2, permissions]
+
+    - role: ssh
+      tags: [sis2, ssh]
+
+    # SIS3: Networking and Firewall
+    - role: firewall
+      tags: [sis3, firewall]
+
+    # SIS4: Docker, Services, and Cron
+    - role: docker
+      tags: [sis4, docker]
+
+    - role: services
+      tags: [sis4, services]
+
+    - role: cron
+      tags: [sis4, cron]
+
+  post_tasks:
+    - name: Display setup completion message
+      ansible.builtin.debug:
+        msg: |
+          Dapmeet setup completed on {{ inventory_hostname }}!
+          VM Role: {{ vm_role }}
+          Docker Container: {{ docker_container.name }}
+          Container Ports: {{ docker_container.ports | join(', ') }}
+      tags: [always]
+

@@ -1,0 +1,219 @@
+---
+# VM2 - Backend specific variables
+
+vm_role: backend
+
+# Groups specific to VM2
+vm_groups:
+  - name: postgres
+    gid: 114
+  - name: dba
+    gid: 2011
+  - name: backup
+    gid: 2012
+
+# Users specific to VM2
+vm_users:
+  - name: postgres
+    uid: 114
+    group: postgres
+    groups: []
+    shell: /bin/bash
+    system: true
+    home: /var/lib/postgresql
+    comment: "PostgreSQL database service"
+
+  - name: dapmeet-backend
+    uid: 1002
+    group: dapmeet
+    groups: []
+    shell: /bin/bash
+    system: true
+    home: /opt/dapmeet/backend
+    comment: "FastAPI backend service"
+
+  - name: dapmeet-worker
+    uid: 1003
+    group: dapmeet
+    groups: []
+    shell: /bin/bash
+    system: true
+    home: /opt/dapmeet/backend
+    comment: "Background worker for transcriptions"
+
+  - name: backup
+    uid: 1004
+    group: backup
+    groups: [postgres]
+    shell: /bin/bash
+    system: true
+    home: /var/backups
+    comment: "Backup automation"
+
+  - name: sysadmin
+    uid: 1020
+    group: sysadmin
+    groups: [sudo]
+    shell: /bin/bash
+    system: false
+    home: /home/sysadmin
+    comment: "System administrator"
+    ssh_key: true
+
+  - name: devops_user
+    uid: 1021
+    group: devops
+    groups: [dapmeet, docker]
+    shell: /bin/bash
+    system: false
+    home: /home/devops_user
+    comment: "DevOps engineer"
+    ssh_key: true
+
+  - name: dba_user
+    uid: 1022
+    group: dba
+    groups: [postgres]
+    shell: /bin/bash
+    system: false
+    home: /home/dba_user
+    comment: "Database administrator"
+    ssh_key: true
+
+  - name: automation
+    uid: 1030
+    group: automation
+    groups: [dapmeet]
+    shell: /bin/bash
+    system: false
+    home: /home/automation
+    comment: "CI/CD automation bot"
+    ssh_key: true
+
+  - name: monitoring
+    uid: 1040
+    group: monitoring
+    groups: []
+    shell: /bin/bash
+    system: false
+    home: /home/monitoring
+    comment: "System monitoring"
+    ssh_key: false
+
+  - name: auditor
+    uid: 1050
+    group: auditor
+    groups: []
+    shell: /bin/bash
+    system: false
+    home: /home/auditor
+    comment: "Security auditor"
+    ssh_key: true
+
+# Directories for VM2
+vm_directories:
+  - path: "{{ project_base }}/backend"
+    owner: dapmeet-backend
+    group: dapmeet
+    mode: "0755"
+  - path: "{{ project_data }}"
+    owner: dapmeet-backend
+    group: dapmeet
+    mode: "0755"
+  - path: "{{ project_data }}/processing"
+    owner: dapmeet-worker
+    group: dapmeet
+    mode: "0755"
+  - path: "{{ project_logs }}"
+    owner: root
+    group: dapmeet
+    mode: "0755"
+  - path: "{{ project_backups }}/postgresql"
+    owner: backup
+    group: postgres
+    mode: "0750"
+  - path: "{{ project_config }}/backend"
+    owner: root
+    group: dapmeet
+    mode: "0750"
+
+# Firewall ports for VM2
+firewall_ports:
+  - port: 22
+    proto: tcp
+    comment: "SSH"
+  - port: 8000
+    proto: tcp
+    comment: "Backend API"
+  - port: 5432
+    proto: tcp
+    comment: "PostgreSQL"
+
+# Sudoers rules for VM2
+sudoers_rules:
+  - filename: devops
+    content: |
+      %devops ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart dapmeet-*
+      %devops ALL=(ALL) NOPASSWD: /usr/bin/systemctl status dapmeet-*
+      %devops ALL=(ALL) NOPASSWD: /usr/bin/systemctl stop dapmeet-*
+      %devops ALL=(ALL) NOPASSWD: /usr/bin/docker *
+
+  - filename: dba
+    content: |
+      %dba ALL=(postgres) NOPASSWD: /usr/bin/psql
+      %dba ALL=(postgres) NOPASSWD: /usr/bin/pg_dump
+      %dba ALL=(postgres) NOPASSWD: /usr/bin/pg_restore
+      %dba ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart postgresql
+
+  - filename: automation
+    content: |
+      automation ALL=(ALL) NOPASSWD: /opt/dapmeet/scripts/deploy.sh
+      automation ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart dapmeet-*
+      automation ALL=(dapmeet-backend) NOPASSWD: ALL
+      automation ALL=(dapmeet-worker) NOPASSWD: ALL
+
+  - filename: backup
+    content: |
+      backup ALL=(postgres) NOPASSWD: /usr/bin/pg_dump
+      backup ALL=(postgres) NOPASSWD: /usr/bin/pg_dumpall
+      backup ALL=(ALL) NOPASSWD: /usr/bin/tar
+      backup ALL=(ALL) NOPASSWD: /usr/bin/rsync
+
+  - filename: monitoring
+    content: |
+      monitoring ALL=(ALL) NOPASSWD: /usr/bin/systemctl status *
+      monitoring ALL=(ALL) NOPASSWD: /usr/bin/journalctl *
+      monitoring ALL=(postgres) NOPASSWD: /usr/bin/psql -c "SELECT *"
+
+# Docker container for VM2
+docker_container:
+  name: dapmeet-backend
+  image: "{{ backend_image }}"
+  ports:
+    - "8000:8000"
+  env:
+    PYTHONUNBUFFERED: "1"
+    ENV: production
+  restart_policy: always
+
+# Cron jobs for VM2
+cron_jobs:
+  - name: "PostgreSQL daily backup"
+    job: "/opt/dapmeet/scripts/backup_postgres.sh"
+    minute: "0"
+    hour: "3"
+    user: backup
+
+  - name: "Clean old processing files"
+    job: "/opt/dapmeet/scripts/cleanup_processing.sh"
+    minute: "30"
+    hour: "4"
+    user: root
+
+  - name: "Backend logs rotation"
+    job: "/opt/dapmeet/scripts/rotate_backend_logs.sh"
+    minute: "0"
+    hour: "5"
+    weekday: "0"
+    user: root
+

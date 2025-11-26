@@ -1,0 +1,20 @@
+#!/bin/bash
+# Frontend logs backup script
+# Runs daily at 2:00 AM
+
+set -e
+
+BACKUP_DIR="{{ project_backups }}/logs"
+LOG_DIR="{{ project_logs }}"
+DATE=$(date +%Y%m%d)
+
+mkdir -p "$BACKUP_DIR"
+
+# Compress and backup logs
+tar -czf "$BACKUP_DIR/frontend_logs_$DATE.tar.gz" -C "$LOG_DIR" . 2>/dev/null || true
+
+# Remove backups older than 30 days
+find "$BACKUP_DIR" -name "frontend_logs_*.tar.gz" -mtime +30 -delete
+
+echo "Frontend logs backup completed: $DATE"
+

@@ -1,0 +1,65 @@
+---
+# Role: users
+# Purpose: Create groups and users as defined in SIS2
+
+- name: Create common groups
+  ansible.builtin.group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+    state: present
+  loop: "{{ common_groups }}"
+  tags: [users, groups]
+
+- name: Create VM-specific groups
+  ansible.builtin.group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+    state: present
+  loop: "{{ vm_groups }}"
+  tags: [users, groups]
+
+- name: Create sysadmin group
+  ansible.builtin.group:
+    name: sysadmin
+    gid: 2020
+    state: present
+  tags: [users, groups]
+
+- name: Ensure docker group exists
+  ansible.builtin.group:
+    name: docker
+    state: present
+  tags: [users, groups]
+
+- name: Create system users
+  ansible.builtin.user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid }}"
+    group: "{{ item.group }}"
+    groups: "{{ item.groups | default([]) | join(',') }}"
+    shell: "{{ item.shell }}"
+    home: "{{ item.home }}"
+    comment: "{{ item.comment }}"
+    system: "{{ item.system | default(false) }}"
+    create_home: "{{ not item.system | default(true) }}"
+    state: present
+  loop: "{{ vm_users }}"
+  tags: [users]
+
+- name: Set up SSH directory for users with SSH access
+  ansible.builtin.file:
+    path: "{{ item.home }}/.ssh"
+    state: directory
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
+    mode: "0700"
+  loop: "{{ vm_users | selectattr('ssh_key', 'defined') | selectattr('ssh_key', 'equalto', true) | list }}"
+  when: item.ssh_key | default(false)
+  tags: [users, ssh]
+
+- name: Display created users
+  ansible.builtin.debug:
+    msg: "Created user: {{ item.name }} ({{ item.comment }})"
+  loop: "{{ vm_users }}"
+  tags: [users]
+

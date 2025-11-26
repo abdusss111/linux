@@ -1,0 +1,26 @@
+[Unit]
+Description={{ docker_container.name }} Docker Container
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+ExecStartPre=-/usr/bin/docker stop {{ docker_container.name }}
+ExecStartPre=-/usr/bin/docker rm {{ docker_container.name }}
+ExecStartPre=/usr/bin/docker pull {{ docker_container.image }}
+ExecStart=/usr/bin/docker run --rm --name {{ docker_container.name }} \
+{% for port in docker_container.ports %}
+    -p {{ port }} \
+{% endfor %}
+{% for key, value in docker_container.env.items() %}
+    -e {{ key }}={{ value }} \
+{% endfor %}
+    {{ docker_container.image }}
+ExecStop=/usr/bin/docker stop {{ docker_container.name }}
+
+[Install]
+WantedBy=multi-user.target
+

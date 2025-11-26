@@ -1,0 +1,10 @@
+---
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true
+
+- name: Restart container service
+  ansible.builtin.systemd:
+    name: "{{ docker_container.name }}"
+    state: restarted
+
