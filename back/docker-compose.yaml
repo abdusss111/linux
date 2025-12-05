@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15
+    container_name: dapmeet-db
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: dapuser
+      POSTGRES_PASSWORD: dappass
+      POSTGRES_DB: dapmeet
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dapuser -d dapmeet"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  backend:
+    build: .
+    container_name: dapmeet-backend
+    command: >
+      sh -c "
+        echo 'Waiting for database...' &&
+        while ! pg_isready -h db -p 5432 -U dapuser; do
+          echo 'Waiting for database...'
+          sleep 2
+        done &&
+        echo 'Running migrations...' &&
+        alembic upgrade head &&
+        echo 'Starting application...' &&
+        PYTHONPATH=src uvicorn dapmeet.cmd.main:app --host 0.0.0.0 --port 8000 --reload
+      "
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    restart: unless-stopped
+
+volumes:
+  pgdata: {}

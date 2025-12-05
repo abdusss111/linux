@@ -1,0 +1,54 @@
+FROM python:3.13-slim
+
+
+LABEL maintainer="abdurakhimov.abdussalam@example.com"
+LABEL description="Dapmeet Backend - Meeting Transcription Service"
+LABEL version="1.0"
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/app/src
+ENV PORT=8000
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    postgresql-client \
+    curl \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy only requirements first for better layer caching
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create necessary directories for logs and data
+RUN mkdir -p /app/logs /app/data && \
+    chmod 755 /app/logs /app/data
+
+# Create non-root user for security (optional but recommended)
+RUN useradd -m -u 1000 dapmeet && \
+    chown -R dapmeet:dapmeet /app
+
+# Switch to non-root user
+USER dapmeet
+
+# Expose application port
+EXPOSE 8000
+
+# Health check endpoint for monitoring
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
+
+# Run the application
+CMD ["uvicorn", "dapmeet.cmd.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
+

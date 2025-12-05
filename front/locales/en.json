@@ -1,0 +1,81 @@
+{
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "meetings": "Meetings",
+    "analytics": "Analytics",
+    "team": "Team",
+    "settings": "Settings",
+    "version": "Version"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "login": {
+    "welcome": "Welcome to Dapter.AI",
+    "description": "Sign in to access your meeting insights",
+    "google": "Sign in with Google",
+    "terms": "By signing in, you agree to our Terms of Service and Privacy Policy"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "Manage your meetings and view insights",
+    "tabs": {
+      "all": "All Meetings",
+      "recent": "Recent",
+      "upcoming": "Upcoming"
+    },
+    "meetings": {
+      "title": "Meetings",
+      "count": "You have {{count}} total meetings",
+      "search": "Search meetings...",
+      "empty": "No meetings found",
+      "view": "View Details"
+    },
+    "analytics": {
+      "title": "Meeting Analytics",
+      "count": "You have {{count}} meetings this month"
+    }
+  },
+  "meeting": {
+    "back": "Back to Dashboard",
+    "download": {
+      "transcript": "Download Transcript",
+      "summary": "Download Summary"
+    },
+    "transcript": {
+      "title": "Transcript",
+      "description": "Full meeting transcript"
+    },
+    "highlights": {
+      "title": "Key Moments",
+      "description": "Important highlights from the meeting"
+    },
+    "topics": {
+      "title": "Topics",
+      "description": "Main topics discussed"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Manage your account settings and preferences",
+    "profile": {
+      "title": "Profile",
+      "description": "Update your personal information",
+      "name": "Name",
+      "email": "Email",
+      "emailManaged": "Your email is managed by your Google account"
+    },
+    "account": {
+      "title": "Account",
+      "description": "Manage your account settings",
+      "language": "Language",
+      "signOut": "Sign Out"
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save Changes"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+# Node modules and build outputs
+node_modules
+.next
+dist
+
+# Logs
+*.log
+
+# Local env files not needed in production
+.env.local
+.env.development
+
+# Misc
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+README.md
+.vscode
+*.swp
+*.tsbuildinfo

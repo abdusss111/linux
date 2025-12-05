@@ -1,0 +1,475 @@
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=105, bytes_full=[10, 103, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 159, 8, 50, 24, 208, 178, 32, 208, 178, 208, 184, 208, 180, 209, 131, 44, 32, 209, 135, 209, 130, 208, 190, 32, 208, 188, 209, 139, 64, 10, 80, 10, 98, 12, 8, 223, 129, 162, 200, 6, 16, 128, 189, 158, 130, 3, 106, 12, 8, 225, 129, 162, 200, 6, 16, 223, 128, 183, 176, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2в виду, что мы@
+P
+b
+߁��', message_id=405932191, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 160, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968672, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968672, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51536 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51532 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=103, bytes_full=[10, 101, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 161, 8, 50, 22, 208, 190, 208, 191, 208, 191, 208, 190, 208, 183, 208, 184, 209, 134, 208, 184, 208, 190, 208, 189, 208, 184, 64, 10, 80, 10, 98, 12, 8, 223, 129, 162, 200, 6, 16, 128, 137, 149, 239, 2, 106, 12, 8, 225, 129, 162, 200, 6, 16, 212, 202, 236, 158, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2оппозициони@
+P
+b
+߁����', message_id=372377761, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51532 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=115, bytes_full=[10, 113, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 162, 8, 50, 34, 208, 190, 208, 191, 208, 191, 208, 190, 208, 183, 208, 184, 209, 134, 208, 184, 208, 190, 208, 189, 208, 184, 209, 128, 208, 190, 208, 178, 208, 176, 208, 187, 208, 184, 64, 10, 80, 10, 98, 12, 8, 223, 129, 162, 200, 6, 16, 128, 137, 149, 239, 2, 106, 12, 8, 225, 129, 162, 200, 6, 16, 211, 216, 186, 187, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2"оппозиционировали@
+P', message_id=573704354, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51532 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=122, bytes_full=[10, 120, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 163, 8, 50, 41, 208, 190, 208, 191, 208, 191, 208, 190, 208, 183, 208, 184, 209, 134, 208, 184, 208, 190, 208, 189, 208, 184, 209, 128, 208, 190, 208, 178, 208, 176, 208, 187, 208, 184, 32, 208, 186, 208, 176, 208, 186, 64, 10, 80, 10, 98, 12, 8, 223, 129, 162, 200, 6, 16, 192, 251, 221, 237, 2, 106, 12, 8, 226, 129, 162, 200, 6, 16, 137, 167, 137, 194, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2)оппозиционировали к', message_id=691144867, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51545 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=114, bytes_full=[10, 112, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 164, 8, 50, 34, 208, 190, 208, 191, 208, 191, 208, 190, 208, 183, 208, 184, 209, 134, 208, 184, 208, 190, 208, 189, 208, 184, 209, 128, 208, 190, 208, 178, 208, 176, 208, 187, 208, 184, 64, 10, 80, 10, 98, 12, 8, 223, 129, 162, 200, 6, 16, 192, 251, 221, 237, 2, 106, 11, 8, 226, 129, 162, 200, 6, 16, 143, 225, 130, 51, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2"оппозиционировали@
+P', message_id=573704356, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51545 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=132, bytes_full=[10, 129, 1, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 165, 8, 50, 50, 208, 190, 208, 191, 208, 191, 208, 190, 208, 183, 208, 184, 209, 134, 208, 184, 208, 190, 208, 189, 208, 184, 209, 128, 208, 190, 208, 178, 208, 176, 208, 187, 208, 184, 32, 208, 154, 208, 176, 208, 186, 32, 209, 130, 208, 178, 208, 190, 208, 184, 64, 10, 80, 10, 98, 12, 8, 223, 129, 162, 200, 6, 16, 128, 146, 143, 240, 2, 106, 12, 8, 226, 129, 162, 200, 6, 16, 194, 131, 193, 211, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���22оппозиционировали К', message_id=842139813, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51545 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=138, bytes_full=[10, 135, 1, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 166, 8, 50, 56, 208, 190, 208, 191, 208, 191, 208, 190, 208, 183, 208, 184, 209, 134, 208, 184, 208, 190, 208, 189, 208, 184, 209, 128, 208, 190, 208, 178, 208, 176, 208, 187, 208, 184, 44, 32, 208, 154, 208, 176, 208, 186, 32, 209, 130, 208, 178, 208, 190, 208, 184, 32, 209, 129, 208, 190, 64, 10, 80, 10, 98, 12, 8, 223, 129, 162, 200, 6, 16, 192, 251, 221, 237, 2, 106, 12, 8, 226, 129, 162, 200, 6, 16, 128, 137, 172, 138, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���28оппозиционировали, �', message_id=942803110, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51545 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=155, bytes_full=[10, 152, 1, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 167, 8, 50, 73, 208, 158, 208, 191, 208, 191, 208, 190, 208, 183, 208, 184, 209, 134, 208, 184, 208, 190, 208, 189, 208, 184, 209, 128, 208, 190, 208, 178, 208, 176, 208, 187, 208, 184, 44, 32, 208, 154, 208, 176, 208, 186, 32, 209, 130, 208, 178, 208, 190, 208, 184, 32, 209, 129, 208, 190, 209, 130, 209, 128, 209, 131, 208, 180, 208, 189, 208, 184, 208, 186, 208, 184, 63, 64, 10, 80, 10, 98, 12, 8, 223, 129, 162, 200, 6, 16, 128, 146, 143, 240, 2, 106, 12, 8, 226, 129, 162, 200, 6, 16, 191, 173, 171, 169, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2IОппозиционировали, �', message_id=1228015783, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51545 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=87, bytes_full=[10, 85, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 168, 8, 50, 6, 208, 186, 208, 176, 208, 186, 64, 10, 80, 10, 98, 12, 8, 226, 129, 162, 200, 6, 16, 128, 170, 133, 196, 3, 106, 12, 8, 227, 129, 162, 200, 6, 16, 247, 247, 188, 175, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2как@
+P
+b
+⁢�����j
+      ぢ�����', message_id=103942312, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51545 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=95, bytes_full=[10, 93, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 169, 8, 50, 14, 208, 154, 208, 176, 208, 186, 32, 209, 130, 208, 176, 208, 188, 63, 64, 10, 80, 10, 98, 12, 8, 226, 129, 162, 200, 6, 16, 192, 165, 200, 195, 3, 106, 12, 8, 227, 129, 162, 200, 6, 16, 180, 143, 156, 232, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2Как там?@
+P
+b
+⁢�����j
+      �', message_id=238160041, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51545 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=93, bytes_full=[10, 91, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 170, 8, 50, 12, 208, 186, 208, 190, 209, 128, 208, 190, 209, 135, 208, 181, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 192, 223, 202, 174, 3, 106, 12, 8, 235, 129, 162, 200, 6, 16, 195, 222, 202, 174, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2
+                                                                                                        короче@
+P
+b
+偢���ʮj
+      끢�', message_id=204605610, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51602 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 171, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968683, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968683, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51602 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=87, bytes_full=[10, 85, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 172, 8, 50, 6, 208, 186, 208, 176, 208, 186, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 192, 223, 202, 174, 3, 106, 12, 8, 239, 129, 162, 200, 6, 16, 243, 141, 165, 226, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2как@
+P
+b
+偢���ʮj
+      ���', message_id=103942316, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51629 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=99, bytes_full=[10, 97, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 173, 8, 50, 18, 208, 162, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 63, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 128, 150, 190, 207, 3, 106, 12, 8, 235, 129, 162, 200, 6, 16, 136, 221, 133, 221, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2Ты можешь?@
+P
+b
+偢�����j', message_id=305268909, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51629 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=106, bytes_full=[10, 104, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 175, 8, 50, 25, 208, 162, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 32, 209, 141, 209, 130, 208, 190, 63, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 128, 237, 129, 176, 3, 106, 12, 8, 240, 129, 162, 200, 6, 16, 155, 145, 189, 166, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2Ты можешь это?@
+P
+b
+偢�', message_id=422709423, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51629 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=109, bytes_full=[10, 107, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 176, 8, 50, 29, 209, 130, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 32, 209, 141, 209, 130, 208, 190, 32, 208, 189, 208, 181, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 128, 210, 147, 173, 3, 106, 11, 8, 241, 129, 162, 200, 6, 16, 151, 140, 206, 28, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2ты можешь это не@
+P
+b
+�', message_id=489818288, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51629 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=116, bytes_full=[10, 114, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 177, 8, 50, 35, 208, 162, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 32, 209, 141, 209, 130, 208, 190, 32, 208, 189, 208, 181, 32, 209, 130, 208, 190, 63, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 128, 170, 133, 196, 3, 106, 12, 8, 241, 129, 162, 200, 6, 16, 147, 142, 170, 137, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2#Ты можешь это не то?@
+', message_id=590481585, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51637 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=127, bytes_full=[10, 125, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 178, 8, 50, 46, 209, 130, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 32, 209, 141, 209, 130, 208, 190, 32, 208, 189, 208, 181, 32, 209, 130, 208, 190, 44, 32, 209, 135, 209, 130, 208, 190, 208, 177, 209, 139, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 128, 150, 190, 207, 3, 106, 12, 8, 241, 129, 162, 200, 6, 16, 145, 150, 255, 205, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2.ты можешь это не то, �', message_id=775030962, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51637 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=99, bytes_full=[10, 97, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 181, 8, 50, 18, 208, 162, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 63, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 128, 179, 255, 196, 3, 106, 12, 8, 235, 129, 162, 200, 6, 16, 136, 250, 198, 210, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2Ты можешь?@
+P
+b
+偢�����j', message_id=305268917, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51637 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=127, bytes_full=[10, 125, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 182, 8, 50, 46, 209, 130, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 32, 209, 141, 209, 130, 208, 190, 32, 208, 189, 208, 181, 32, 209, 130, 208, 190, 44, 32, 209, 135, 209, 130, 208, 190, 208, 177, 209, 139, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 192, 214, 208, 173, 3, 106, 12, 8, 241, 129, 162, 200, 6, 16, 209, 214, 145, 172, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2.ты можешь это не то, �', message_id=775030966, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51637 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=99, bytes_full=[10, 97, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 183, 8, 50, 18, 208, 162, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 63, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 128, 192, 159, 171, 3, 106, 12, 8, 235, 129, 162, 200, 6, 16, 136, 135, 231, 184, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2Ты можешь?@
+P
+b
+偢�����j', message_id=305268919, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51637 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=114, bytes_full=[10, 112, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 184, 8, 50, 33, 208, 162, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 32, 209, 129, 208, 186, 208, 176, 208, 183, 208, 176, 209, 130, 209, 140, 63, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 192, 205, 214, 172, 3, 106, 12, 8, 246, 129, 162, 200, 6, 16, 228, 170, 139, 148, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2!Ты можешь сказать?@
+P
+', message_id=556927160, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51667 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=117, bytes_full=[10, 115, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 185, 8, 50, 37, 209, 130, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 32, 209, 129, 208, 186, 208, 176, 208, 183, 208, 176, 209, 130, 209, 140, 32, 208, 188, 209, 139, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 192, 205, 214, 172, 3, 106, 11, 8, 247, 129, 162, 200, 6, 16, 217, 148, 223, 56, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2%ты можешь сказать мы', message_id=624036025, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51667 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=129, bytes_full=[10, 127, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 186, 8, 50, 49, 208, 162, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 32, 209, 129, 208, 186, 208, 176, 208, 183, 208, 176, 209, 130, 209, 140, 32, 208, 188, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 208, 188, 63, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 128, 210, 147, 173, 3, 106, 11, 8, 247, 129, 162, 200, 6, 16, 152, 167, 234, 85, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���21Ты можешь сказать мы', message_id=825362618, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51667 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=101, bytes_full=[10, 99, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 204, 128, 128, 128, 128, 3, 24, 188, 8, 32, 1, 50, 18, 208, 162, 209, 139, 32, 208, 188, 208, 190, 208, 182, 208, 181, 209, 136, 209, 140, 63, 64, 10, 80, 10, 98, 12, 8, 229, 129, 162, 200, 6, 16, 192, 196, 220, 171, 3, 106, 12, 8, 235, 129, 162, 200, 6, 16, 201, 253, 213, 156, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀��� 2Ты можешь?@
+P
+b
+偢���ܫ', message_id=18876604, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51698 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=97, bytes_full=[10, 95, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 189, 8, 50, 17, 208, 189, 209, 131, 44, 32, 208, 186, 208, 176, 208, 186, 32, 208, 177, 209, 139, 64, 10, 80, 10, 98, 12, 8, 251, 129, 162, 200, 6, 16, 128, 174, 153, 181, 1, 106, 11, 8, 252, 129, 162, 200, 6, 16, 241, 193, 215, 47, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2ну, как бы@
+P
+b
+��������j
+         ', message_id=288491709, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51698 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 190, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968702, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968702, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51698 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=103, bytes_full=[10, 101, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 191, 8, 50, 22, 208, 162, 208, 190, 208, 179, 208, 180, 208, 176, 32, 208, 180, 208, 176, 208, 178, 208, 176, 208, 185, 46, 64, 10, 80, 10, 98, 12, 8, 128, 130, 162, 200, 6, 16, 128, 245, 196, 128, 2, 106, 12, 8, 131, 130, 162, 200, 6, 16, 192, 130, 147, 157, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2Тогда давай.@
+P
+b
+������', message_id=372377791, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51742 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 192, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968704, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968704, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51742 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=115, bytes_full=[10, 113, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 193, 8, 50, 35, 208, 162, 208, 190, 208, 179, 208, 180, 208, 176, 32, 208, 180, 208, 176, 208, 178, 208, 176, 208, 185, 32, 209, 129, 208, 181, 208, 185, 209, 135, 208, 176, 209, 129, 46, 64, 10, 80, 10, 98, 12, 8, 128, 130, 162, 200, 6, 16, 192, 137, 163, 144, 2, 106, 11, 8, 132, 130, 162, 200, 6, 16, 247, 228, 168, 24, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2#Тогда давай сейчас.@
+', message_id=590481601, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51742 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=127, bytes_full=[10, 125, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 194, 8, 50, 46, 208, 162, 208, 190, 208, 179, 208, 180, 208, 176, 32, 208, 180, 208, 176, 208, 178, 208, 176, 208, 185, 32, 209, 129, 208, 181, 208, 185, 209, 135, 208, 176, 209, 129, 32, 209, 130, 208, 190, 208, 179, 208, 180, 208, 176, 46, 64, 10, 80, 10, 98, 12, 8, 128, 130, 162, 200, 6, 16, 192, 140, 164, 185, 2, 106, 12, 8, 132, 130, 162, 200, 6, 16, 243, 145, 148, 151, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2.Тогда давай сейчас т', message_id=775030978, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51742 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 195, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968707, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968707, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51742 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=102, bytes_full=[10, 100, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 196, 8, 50, 22, 208, 190, 208, 177, 209, 143, 208, 183, 208, 176, 209, 130, 208, 181, 208, 187, 209, 140, 208, 189, 208, 190, 64, 10, 80, 10, 98, 12, 8, 128, 130, 162, 200, 6, 16, 192, 130, 252, 129, 2, 106, 11, 8, 134, 130, 162, 200, 6, 16, 203, 159, 217, 57, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2обязательно@
+P
+b
+������', message_id=372377796, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 197, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968709, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968709, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51763 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51761 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=84, bytes_full=[10, 82, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 198, 8, 50, 4, 209, 129, 208, 190, 64, 10, 80, 10, 98, 11, 8, 139, 130, 162, 200, 6, 16, 192, 168, 165, 4, 106, 12, 8, 142, 130, 162, 200, 6, 16, 247, 151, 150, 233, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2со@
+P
+b
+�������j
+       ��������x', message_id=70387910, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 199, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968711, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968711, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51809 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51807 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=102, bytes_full=[10, 100, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 200, 8, 50, 22, 209, 129, 208, 190, 208, 183, 208, 178, 208, 190, 208, 189, 208, 184, 209, 130, 209, 140, 209, 129, 209, 143, 64, 10, 80, 10, 98, 11, 8, 139, 130, 162, 200, 6, 16, 128, 164, 232, 3, 106, 12, 8, 142, 130, 162, 200, 6, 16, 178, 203, 145, 219, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2созвониться@
+P
+b
+������', message_id=372377800, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51807 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 201, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968713, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968713, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51807 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=154, bytes_full=[10, 151, 1, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 202, 8, 50, 73, 208, 161, 208, 190, 208, 183, 208, 178, 208, 190, 208, 189, 208, 184, 209, 130, 209, 140, 209, 129, 209, 143, 32, 208, 178, 209, 129, 208, 181, 208, 179, 208, 190, 32, 209, 135, 209, 130, 208, 190, 32, 208, 159, 208, 190, 209, 130, 208, 190, 208, 188, 32, 208, 191, 208, 190, 208, 180, 208, 181, 208, 187, 208, 184, 209, 136, 209, 140, 209, 129, 209, 143, 46, 64, 10, 80, 10, 98, 11, 8, 139, 130, 162, 200, 6, 16, 128, 200, 208, 7, 106, 12, 8, 143, 130, 162, 200, 6, 16, 152, 129, 247, 218, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2IСозвониться всего ч�', message_id=1228015818, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51827 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=158, bytes_full=[10, 155, 1, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 203, 8, 50, 77, 209, 129, 208, 190, 208, 183, 208, 178, 208, 190, 208, 189, 208, 184, 209, 130, 209, 140, 209, 129, 209, 143, 32, 208, 178, 209, 129, 208, 181, 208, 179, 208, 190, 32, 209, 135, 209, 130, 208, 190, 32, 208, 159, 208, 190, 209, 130, 208, 190, 208, 188, 32, 208, 191, 208, 190, 208, 180, 208, 181, 208, 187, 208, 184, 209, 136, 209, 140, 209, 129, 209, 143, 32, 209, 129, 208, 190, 64, 10, 80, 10, 98, 11, 8, 139, 130, 162, 200, 6, 16, 128, 160, 194, 30, 106, 12, 8, 144, 130, 162, 200, 6, 16, 147, 253, 181, 135, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2Mсозвониться всего ч�', message_id=1295124683, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51827 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 204, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968716, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968716, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=158, bytes_full=[10, 155, 1, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 205, 8, 50, 77, 208, 161, 208, 190, 208, 183, 208, 178, 208, 190, 208, 189, 208, 184, 209, 130, 209, 140, 209, 129, 209, 143, 32, 208, 178, 209, 129, 208, 181, 208, 179, 208, 190, 32, 209, 135, 209, 130, 208, 190, 32, 208, 159, 208, 190, 209, 130, 208, 190, 208, 188, 32, 208, 191, 208, 190, 208, 180, 208, 181, 208, 187, 208, 184, 209, 136, 209, 140, 209, 129, 209, 143, 32, 209, 129, 208, 190, 64, 10, 80, 10, 98, 11, 8, 139, 130, 162, 200, 6, 16, 128, 160, 194, 30, 106, 12, 8, 144, 130, 162, 200, 6, 16, 147, 253, 181, 135, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2MСозвониться всего ч�', message_id=1295124685, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=90, bytes_full=[10, 88, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 205, 8, 50, 9, 208, 188, 208, 189, 208, 190, 208, 185, 46, 64, 10, 80, 10, 98, 12, 8, 144, 130, 162, 200, 6, 16, 147, 253, 181, 135, 1, 106, 12, 8, 144, 130, 162, 200, 6, 16, 144, 153, 210, 192, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7΀���2        мной.@
+P
+b
+��������j
+        �����', message_id=154273997, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51827 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51829 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51831 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 206, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968718, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968718, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 206, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968718, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968718, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51831 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51829 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=84, bytes_full=[10, 82, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 207, 8, 50, 4, 208, 180, 208, 176, 64, 10, 80, 10, 98, 11, 8, 139, 130, 162, 200, 6, 16, 128, 173, 226, 4, 106, 12, 8, 145, 130, 162, 200, 6, 16, 245, 197, 189, 191, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2да@
+P
+b
+�������j
+       �����Ž�x', message_id=70387919, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 207, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968719, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968719, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51831 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51829 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 208, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968720, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968720, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 208, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968720, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968720, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51831 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51829 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=91, bytes_full=[10, 89, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 209, 8, 50, 11, 208, 148, 208, 176, 44, 32, 208, 180, 208, 176, 46, 64, 10, 80, 10, 98, 11, 8, 139, 130, 162, 200, 6, 16, 128, 218, 196, 9, 106, 12, 8, 145, 130, 162, 200, 6, 16, 240, 170, 216, 182, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2
+                                                                                                        Да, да.@
+P
+b
+������� j
+        ����', message_id=187828433, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 209, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968721, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968721, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51829 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51831 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 211, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968723, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968723, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 211, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968723, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968723, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51829 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51831 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 212, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968724, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968724, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=85, bytes_full=[10, 83, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 212, 8, 50, 4, 208, 190, 208, 189, 64, 10, 80, 10, 98, 12, 8, 150, 130, 162, 200, 6, 16, 128, 174, 171, 169, 3, 106, 12, 8, 152, 130, 162, 200, 6, 16, 224, 227, 245, 186, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2он@
+P
+b
+��������j
+        ��������x', message_id=70387924, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51904 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51903 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 213, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968725, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968725, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 213, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968725, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968725, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51904 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51903 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=94, bytes_full=[10, 92, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 214, 8, 50, 13, 208, 176, 32, 208, 191, 208, 190, 209, 130, 208, 190, 208, 188, 64, 10, 80, 10, 98, 12, 8, 150, 130, 162, 200, 6, 16, 192, 187, 226, 170, 3, 106, 12, 8, 154, 130, 162, 200, 6, 16, 240, 234, 188, 222, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+а потом@-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2
+P
+b
+�������j
+       ���', message_id=221382870, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 214, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968726, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968726, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51923 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51922 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 215, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968727, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968727, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 215, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968727, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968727, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51923 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51922 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 216, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968728, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968728, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=93, bytes_full=[10, 91, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 216, 8, 50, 12, 208, 186, 208, 190, 209, 128, 208, 190, 209, 135, 208, 181, 64, 10, 80, 10, 98, 12, 8, 157, 130, 162, 200, 6, 16, 192, 158, 161, 181, 3, 106, 12, 8, 158, 130, 162, 200, 6, 16, 183, 236, 216, 160, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2
+                                                                                                        короче@
+P
+b
+��������j
+        ����', message_id=204605656, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51942 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51922 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 217, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968729, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968729, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=103, bytes_full=[10, 101, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 217, 8, 50, 22, 208, 154, 208, 190, 209, 128, 208, 190, 209, 135, 208, 181, 32, 209, 131, 32, 208, 189, 208, 176, 209, 129, 64, 10, 80, 10, 98, 12, 8, 157, 130, 162, 200, 6, 16, 192, 167, 155, 182, 3, 106, 12, 8, 158, 130, 162, 200, 6, 16, 177, 187, 217, 176, 2, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2Короче у нас@
+P
+b
+������', message_id=372377817, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+INFO:     127.0.0.1:51942 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51922 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=113, bytes_full=[10, 111, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 218, 8, 50, 32, 208, 154, 208, 190, 209, 128, 208, 190, 209, 135, 208, 181, 32, 209, 131, 32, 208, 189, 208, 176, 209, 129, 32, 208, 189, 208, 181, 209, 130, 209, 131, 46, 64, 10, 80, 10, 98, 12, 8, 157, 130, 162, 200, 6, 16, 128, 190, 204, 184, 3, 106, 12, 8, 158, 130, 162, 200, 6, 16, 237, 251, 244, 136, 3, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2 Короче у нас нету.@
+P
+b', message_id=540149978, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 218, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968730, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968730, 'text': '', 'version': 1, 'lang_id': None}
+INFO:     127.0.0.1:51942 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51922 - "POST /api/meetings/hbb-xqgh-tjy/raw-transcript HTTP/1.1" 200 OK
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 221, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968733, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968733, 'text': '', 'version': 1, 'lang_id': None}
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=122, bytes_full=[10, 120, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 205, 128, 128, 128, 128, 3, 24, 221, 8, 50, 41, 208, 154, 208, 190, 209, 128, 208, 190, 209, 135, 208, 181, 32, 209, 131, 32, 208, 189, 208, 176, 209, 129, 32, 208, 189, 208, 181, 209, 130, 209, 131, 32, 208, 190, 209, 130, 208, 180, 208, 181, 46, 64, 10, 80, 10, 98, 12, 8, 157, 130, 162, 200, 6, 16, 192, 194, 137, 185, 3, 106, 12, 8, 159, 130, 162, 200, 6, 16, 159, 134, 162, 231, 1, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='7̀���2)Короче у нас нету от�', message_id=691144925, version=1, lang_id=None
+Participant not found in mapping for device_id: spaces/j5ZV3BSRHZEB/devices/227...
+[DECODED-BYTES-FULL] Meeting hbb-xqgh-tjy: bytes_length=51, bytes_full=[10, 49, 10, 31, 115, 112, 97, 99, 101, 115, 47, 106, 53, 90, 86, 51, 66, 83, 82, 72, 90, 69, 66, 47, 100, 101, 118, 105, 99, 101, 115, 47, 50, 50, 55, 16, 206, 128, 128, 128, 128, 3, 24, 220, 8, 64, 10, 80, 10, 120, 1]
+Data doesn't appear to be gzip compressed, using as-is
+[DECODER] _extract_text: Failed to extract text. start_idx=36, text_str_start=34, str_len=50
+[DECODED-FULL] Meeting hbb-xqgh-tjy: device_id_FULL='spaces/j5ZV3BSRHZEB/devices/227', text_FULL='', message_id=171968732, version=1, lang_id=None
+[RAW-TRANSCRIPT] Meeting hbb-xqgh-tjy: Invalid decoded data - device_id=spaces/j5ZV3BSRHZEB/devices/227, text=, full_data={'device_id': 'spaces/j5ZV3BSRHZEB/devices/227', 'message_id': 171968732, 'text': '', 'version': 1, 'lang_id': None}

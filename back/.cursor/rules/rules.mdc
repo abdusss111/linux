@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+---
+
+all architecture in file @docs/architecture
+do not creatre md files if i was not asked you
+
+do not hallucinate
+apply best practices, but do not overengineering
+do not create test files unless i ask you
+do not create any files without asking me
+if you have any misunderstanding ask me
