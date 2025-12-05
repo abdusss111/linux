@@ -1,0 +1,23 @@
+# /etc/rsyslog.d/10-imjournal.conf
+# Journal integration configuration
+# Managed by Ansible - SIS6
+
+# Import messages from systemd journal
+module(load="imjournal"
+       StateFile="imjournal.state"
+       IgnorePreviousMessages="off"
+       Ratelimit.Interval="600"
+       Ratelimit.Burst="20000"
+       PersistStateInterval="100")
+
+# Template for journal-sourced messages
+template(name="JournalFormat" type="list") {
+    property(name="timestamp" dateFormat="rfc3339")
+    constant(value=" ")
+    property(name="hostname")
+    constant(value=" ")
+    property(name="syslogtag")
+    property(name="msg" spifno1telerl="on")
+    constant(value="\n")
+}
+

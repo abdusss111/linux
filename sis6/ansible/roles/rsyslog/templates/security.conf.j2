@@ -1,0 +1,46 @@
+# /etc/rsyslog.d/51-security.conf
+# Security event logging configuration
+# Managed by Ansible - SIS6
+
+# Template for security logs
+template(name="SecurityLogFormat" type="list") {
+    property(name="timestamp" dateFormat="rfc3339")
+    constant(value=" SECURITY ")
+    property(name="hostname")
+    constant(value=" ")
+    property(name="programname")
+    constant(value="[")
+    property(name="procid")
+    constant(value="]: ")
+    property(name="msg" droplastlf="on")
+    constant(value="\n")
+}
+
+# Capture all authentication events
+auth,authpriv.*    {{ project_logs }}/security.log;SecurityLogFormat
+
+# Capture sudo events
+if $programname == 'sudo' then {
+    action(type="omfile" file="{{ project_logs }}/sudo.log" template="SecurityLogFormat")
+}
+
+# Capture SSH events  
+if $programname == 'sshd' then {
+    action(type="omfile" file="{{ project_logs }}/sshd.log" template="SecurityLogFormat")
+}
+
+# Capture su events
+if $programname == 'su' then {
+    action(type="omfile" file="{{ project_logs }}/su.log" template="SecurityLogFormat")
+}
+
+# Capture PAM events
+if $msg contains 'pam_' then {
+    action(type="omfile" file="{{ project_logs }}/pam.log" template="SecurityLogFormat")
+}
+
+# Alert on failed authentication attempts
+if $msg contains 'Failed password' or $msg contains 'authentication failure' then {
+    action(type="omfile" file="{{ project_logs }}/auth_failures.log" template="SecurityLogFormat")
+}
+

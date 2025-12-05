@@ -1,0 +1,75 @@
+---
+# Role: journald
+# Purpose: Configure systemd-journald for comprehensive logging
+
+- name: Ensure journal directory exists
+  ansible.builtin.file:
+    path: /var/log/journal
+    state: directory
+    owner: root
+    group: systemd-journal
+    mode: '2755'
+
+- name: Configure journald
+  ansible.builtin.template:
+    src: journald.conf.j2
+    dest: /etc/systemd/journald.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify: Restart journald
+
+- name: Create journal drop-in directory
+  ansible.builtin.file:
+    path: /etc/systemd/journald.conf.d
+    state: directory
+    mode: '0755'
+
+- name: Configure journal rate limiting
+  ansible.builtin.template:
+    src: rate-limit.conf.j2
+    dest: /etc/systemd/journald.conf.d/rate-limit.conf
+    mode: '0644'
+  notify: Restart journald
+
+- name: Ensure systemd-journal group exists
+  ansible.builtin.group:
+    name: systemd-journal
+    state: present
+    system: yes
+
+- name: Add admin users to systemd-journal group
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: systemd-journal
+    append: yes
+  loop:
+    - root
+  ignore_errors: yes
+
+- name: Set journal file permissions
+  ansible.builtin.file:
+    path: /var/log/journal
+    state: directory
+    recurse: yes
+    owner: root
+    group: systemd-journal
+    mode: '2755'
+
+- name: Ensure journald service is enabled and running
+  ansible.builtin.systemd:
+    name: systemd-journald
+    state: started
+    enabled: true
+
+- name: Verify journal is working
+  ansible.builtin.command: journalctl --verify
+  register: journal_verify
+  changed_when: false
+  failed_when: false
+
+- name: Display journal status
+  ansible.builtin.debug:
+    msg: "Journal verification: {{ 'PASS' if journal_verify.rc == 0 else 'NEEDS ATTENTION' }}"
+

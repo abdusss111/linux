@@ -1,0 +1,65 @@
+---
+# Role: rsyslog
+# Purpose: Configure rsyslog for log forwarding and custom log files
+
+- name: Ensure rsyslog is installed
+  ansible.builtin.apt:
+    name: rsyslog
+    state: present
+
+- name: Create custom log directories
+  ansible.builtin.file:
+    path: "{{ item.file | dirname }}"
+    state: directory
+    mode: '0755'
+  loop: "{{ rsyslog_config.log_files }}"
+
+- name: Configure main rsyslog
+  ansible.builtin.template:
+    src: rsyslog.conf.j2
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+  notify: Restart rsyslog
+
+- name: Configure rsyslog for journal integration
+  ansible.builtin.template:
+    src: imjournal.conf.j2
+    dest: /etc/rsyslog.d/10-imjournal.conf
+    mode: '0644'
+  notify: Restart rsyslog
+
+- name: Configure custom application logs
+  ansible.builtin.template:
+    src: dapmeet.conf.j2
+    dest: /etc/rsyslog.d/50-dapmeet.conf
+    mode: '0644'
+  notify: Restart rsyslog
+
+- name: Configure security logging
+  ansible.builtin.template:
+    src: security.conf.j2
+    dest: /etc/rsyslog.d/51-security.conf
+    mode: '0644'
+  notify: Restart rsyslog
+
+- name: Configure logrotate for custom logs
+  ansible.builtin.template:
+    src: logrotate-dapmeet.j2
+    dest: /etc/logrotate.d/dapmeet
+    mode: '0644'
+
+- name: Ensure rsyslog service is enabled and running
+  ansible.builtin.systemd:
+    name: rsyslog
+    state: started
+    enabled: true
+
+- name: Verify rsyslog configuration
+  ansible.builtin.command: rsyslogd -N1
+  register: rsyslog_check
+  changed_when: false
+  failed_when: rsyslog_check.rc != 0
+

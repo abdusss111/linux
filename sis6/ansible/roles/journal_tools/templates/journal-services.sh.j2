@@ -1,0 +1,163 @@
+#!/bin/bash
+#==============================================================================
+# Script: journal-services.sh
+# Purpose: Filter and monitor systemd service logs
+# Task 2: Journal toolset - Service filtering
+# Usage: journal-services.sh [OPTIONS] [service...]
+#==============================================================================
+
+set -euo pipefail
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+# Default values
+SINCE="1 hour ago"
+LINES=50
+FOLLOW=false
+PRIORITY=""
+OUTPUT="short-iso"
+
+# Monitored services from configuration
+MONITORED_SERVICES=(
+{% for service in journal_tools.monitored_services %}
+    "{{ service }}"
+{% endfor %}
+)
+
+usage() {
+    cat << EOF
+${CYAN}Journal Service Filter Tool${NC}
+${BLUE}============================${NC}
+
+Usage: $(basename "$0") [OPTIONS] [service...]
+
+Options:
+  -l, --list            List all available services
+  -m, --monitored       Show logs for all monitored services
+  -s, --since TIME      Start time (default: "1 hour ago")
+  -n, --lines NUM       Number of lines to show (default: 50)
+  -f, --follow          Follow logs in real-time
+  -p, --priority LEVEL  Filter by priority
+  -o, --output FORMAT   Output format (short, short-iso, verbose, json)
+  -S, --status          Show service status overview
+  -h, --help            Show this help
+
+Monitored services:
+  ${MONITORED_SERVICES[*]}
+
+Examples:
+  $(basename "$0") sshd                    # Show sshd logs
+  $(basename "$0") -f nginx docker         # Follow multiple services
+  $(basename "$0") --monitored             # All monitored services
+  $(basename "$0") -S                      # Service status overview
+
+EOF
+    exit 0
+}
+
+list_services() {
+    echo -e "${CYAN}=== Available Systemd Services ===${NC}"
+    systemctl list-units --type=service --all --no-pager | head -50
+    echo ""
+    echo -e "${YELLOW}Monitored services:${NC}"
+    printf '  %s\n' "${MONITORED_SERVICES[@]}"
+}
+
+show_status() {
+    echo -e "${CYAN}=== Service Status Overview ===${NC}"
+    echo ""
+    
+    for service in "${MONITORED_SERVICES[@]}"; do
+        if systemctl is-active --quiet "$service" 2>/dev/null; then
+            status="${GREEN}●${NC} Running"
+        elif systemctl is-enabled --quiet "$service" 2>/dev/null; then
+            status="${YELLOW}○${NC} Stopped"
+        else
+            status="${RED}○${NC} Not found"
+        fi
+        printf "%-25s %b\n" "$service" "$status"
+    done
+    
+    echo ""
+    echo -e "${BLUE}Recent errors (last hour):${NC}"
+    for service in "${MONITORED_SERVICES[@]}"; do
+        count=$(journalctl -u "$service" --since "1 hour ago" -p err --no-pager 2>/dev/null | wc -l)
+        if [ "$count" -gt 0 ]; then
+            echo -e "  ${RED}$service: $count errors${NC}"
+        fi
+    done
+}
+
+show_service_logs() {
+    local services=("$@")
+    
+    if [ ${#services[@]} -eq 0 ]; then
+        echo -e "${RED}Error: No service specified${NC}"
+        usage
+    fi
+    
+    local cmd="journalctl"
+    
+    # Build unit list
+    for svc in "${services[@]}"; do
+        cmd="$cmd -u $svc"
+    done
+    
+    cmd="$cmd --since=\"$SINCE\" --output=$OUTPUT"
+    [ -n "$PRIORITY" ] && cmd="$cmd -p $PRIORITY"
+    
+    if $FOLLOW; then
+        cmd="$cmd -f"
+    else
+        cmd="$cmd -n $LINES --no-pager"
+    fi
+    
+    echo -e "${CYAN}=== Logs for: ${YELLOW}${services[*]}${NC}"
+    echo -e "${BLUE}Since: $SINCE${NC}"
+    echo ""
+    
+    eval "$cmd"
+}
+
+show_monitored() {
+    echo -e "${CYAN}=== Logs for Monitored Services ===${NC}"
+    echo -e "${BLUE}Since: $SINCE${NC}"
+    echo ""
+    
+    for service in "${MONITORED_SERVICES[@]}"; do
+        echo -e "\n${YELLOW}--- $service ---${NC}"
+        journalctl -u "$service" --since="$SINCE" -n 10 --no-pager --output="$OUTPUT" 2>/dev/null || \
+            echo "  No logs or service not found"
+    done
+}
+
+# Parse arguments
+SERVICES=()
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -l|--list) list_services; exit 0 ;;
+        -m|--monitored) show_monitored; exit 0 ;;
+        -s|--since) SINCE="$2"; shift 2 ;;
+        -n|--lines) LINES="$2"; shift 2 ;;
+        -f|--follow) FOLLOW=true; shift ;;
+        -p|--priority) PRIORITY="$2"; shift 2 ;;
+        -o|--output) OUTPUT="$2"; shift 2 ;;
+        -S|--status) show_status; exit 0 ;;
+        -h|--help) usage ;;
+        -*) echo "Unknown option: $1"; usage ;;
+        *) SERVICES+=("$1"); shift ;;
+    esac
+done
+
+if [ ${#SERVICES[@]} -eq 0 ]; then
+    usage
+fi
+
+show_service_logs "${SERVICES[@]}"
+

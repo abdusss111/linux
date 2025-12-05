@@ -1,0 +1,211 @@
+---
+# SIS6 - Global Variables for Journaling and Auditing
+
+# Project paths (inherited from SIS5)
+project_base: /opt/dapmeet
+project_logs: /var/log/dapmeet
+project_data: /var/dapmeet
+project_config: /etc/dapmeet
+scripts_dir: /opt/dapmeet/scripts/journal
+
+# Timezone
+timezone: "UTC"
+
+# =============================================================================
+# Journald Configuration
+# =============================================================================
+journald_config:
+  # Storage settings
+  storage: persistent           # persistent, volatile, auto, none
+  compress: "yes"               # Compress stored journal files
+  seal: "yes"                   # Enable Forward Secure Sealing
+  
+  # Size limits
+  system_max_use: 500M          # Max disk space for system journal
+  system_keep_free: 1G          # Minimum free space to leave
+  system_max_file_size: 50M     # Max size of individual journal files
+  system_max_files: 100         # Max number of journal files to keep
+  
+  # Runtime (volatile) limits
+  runtime_max_use: 100M
+  runtime_keep_free: 100M
+  runtime_max_file_size: 10M
+  
+  # Rate limiting
+  rate_limit_interval_sec: 30   # Rate limit time window
+  rate_limit_burst: 10000       # Max messages per interval
+  
+  # Forwarding
+  forward_to_syslog: "yes"      # Forward to rsyslog
+  forward_to_kmsg: "no"
+  forward_to_console: "no"
+  forward_to_wall: "yes"        # Forward emergency messages to wall
+  
+  # Max line/field size
+  max_level_store: debug        # Max log level to store
+  max_level_syslog: debug       # Max level to forward to syslog
+
+# =============================================================================
+# Rsyslog Configuration
+# =============================================================================
+rsyslog_config:
+  # Application-specific log files
+  log_files:
+    - facility: "local0"
+      file: "/var/log/dapmeet/app.log"
+      description: "Dapmeet application logs"
+    - facility: "local1"
+      file: "/var/log/dapmeet/security.log"
+      description: "Security-related events"
+    - facility: "local2"
+      file: "/var/log/dapmeet/audit.log"
+      description: "Audit trail logs"
+
+# =============================================================================
+# Auditd Configuration
+# =============================================================================
+auditd_config:
+  # Buffer and performance
+  buffer_size: 8192
+  failure_mode: 1               # 0=silent, 1=printk, 2=panic
+  backlog_limit: 8192
+  
+  # Log settings
+  max_log_file: 50              # MB
+  max_log_file_action: rotate
+  num_logs: 10
+  
+  # Network (optional remote logging)
+  tcp_listen_port: 60
+  tcp_max_per_addr: 1
+
+# =============================================================================
+# Audit Rules - Security Sensitive Actions
+# =============================================================================
+audit_rules:
+  # File integrity monitoring
+  file_watches:
+    - path: /etc/sudoers
+      permissions: wa
+      key: sudoers_changes
+    - path: /etc/sudoers.d
+      permissions: wa
+      key: sudoers_changes
+    - path: /etc/passwd
+      permissions: wa
+      key: identity_changes
+    - path: /etc/group
+      permissions: wa
+      key: identity_changes
+    - path: /etc/shadow
+      permissions: wa
+      key: identity_changes
+    - path: /etc/gshadow
+      permissions: wa
+      key: identity_changes
+    - path: /etc/ssh/sshd_config
+      permissions: wa
+      key: ssh_config_changes
+    - path: /etc/ssh/ssh_config
+      permissions: wa
+      key: ssh_config_changes
+    - path: /etc/pam.d
+      permissions: wa
+      key: pam_changes
+    - path: /etc/security
+      permissions: wa
+      key: security_changes
+    - path: /etc/crontab
+      permissions: wa
+      key: cron_changes
+    - path: /etc/cron.d
+      permissions: wa
+      key: cron_changes
+    - path: /var/spool/cron
+      permissions: wa
+      key: cron_changes
+    - path: /etc/systemd/system
+      permissions: wa
+      key: systemd_changes
+    # Dapmeet-specific files
+    - path: "{{ project_config }}"
+      permissions: wa
+      key: dapmeet_config_changes
+    - path: "{{ project_base }}"
+      permissions: wa
+      key: dapmeet_app_changes
+
+  # Syscall monitoring
+  syscalls:
+    - name: execve
+      arch: b64
+      key: program_execution
+    - name: delete_module
+      key: kernel_modules
+    - name: init_module
+      key: kernel_modules
+    - name: finit_module
+      key: kernel_modules
+
+  # User/Group management commands
+  privileged_commands:
+    - /usr/bin/passwd
+    - /usr/bin/chsh
+    - /usr/bin/chfn
+    - /usr/sbin/useradd
+    - /usr/sbin/userdel
+    - /usr/sbin/usermod
+    - /usr/sbin/groupadd
+    - /usr/sbin/groupdel
+    - /usr/sbin/groupmod
+    - /usr/bin/sudo
+    - /usr/bin/su
+
+# =============================================================================
+# Journal Toolset Configuration
+# =============================================================================
+journal_tools:
+  # Services to monitor
+  monitored_services:
+    - sshd
+    - docker
+    - nginx
+    - postgresql
+    - dapmeet-frontend
+    - dapmeet-backend
+    - auditd
+    - cron
+
+  # Alert patterns to watch for
+  alert_patterns:
+    - pattern: "Failed password"
+      severity: warning
+      description: "SSH authentication failure"
+    - pattern: "authentication failure"
+      severity: warning
+      description: "PAM authentication failure"
+    - pattern: "COMMAND="
+      severity: info
+      description: "Sudo command execution"
+    - pattern: "session opened"
+      severity: info
+      description: "User session started"
+    - pattern: "session closed"
+      severity: info
+      description: "User session ended"
+    - pattern: "error"
+      severity: error
+      description: "Error message detected"
+    - pattern: "fatal"
+      severity: critical
+      description: "Fatal error detected"
+    - pattern: "denied"
+      severity: warning
+      description: "Access denied event"
+    - pattern: "unauthorized"
+      severity: critical
+      description: "Unauthorized access attempt"
+
+  # Log retention
+  retention_days: 30
+

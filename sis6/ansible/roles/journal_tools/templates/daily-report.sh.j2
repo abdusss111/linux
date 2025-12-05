@@ -1,0 +1,151 @@
+#!/bin/bash
+#==============================================================================
+# Script: daily-report.sh
+# Purpose: Generate daily journal and security report
+# Task 2: Journal toolset - Daily reporting
+# Schedule: Runs daily at 7:00 AM via cron
+# Usage: daily-report.sh [OPTIONS]
+#==============================================================================
+
+set -euo pipefail
+
+# Configuration
+REPORT_DIR="{{ project_logs }}/reports"
+DATE=$(date +%Y-%m-%d)
+REPORT_FILE="$REPORT_DIR/daily_report_$DATE.txt"
+EMAIL_RECIPIENT="${EMAIL_RECIPIENT:-root}"
+
+usage() {
+    cat << EOF
+Daily Journal Report Generator
+
+Usage: $(basename "$0") [OPTIONS]
+
+Options:
+  -o, --output FILE     Output file (default: $REPORT_FILE)
+  -e, --email ADDRESS   Email report to address
+  -q, --quiet           Don't print to stdout
+  -h, --help            Show this help
+
+EOF
+    exit 0
+}
+
+generate_report() {
+    cat << EOF
+================================================================================
+                    DAILY SYSTEM REPORT - $DATE
+                    Generated: $(date '+%Y-%m-%d %H:%M:%S')
+                    Hostname: $(hostname)
+================================================================================
+
+1. SYSTEM OVERVIEW
+------------------
+Uptime: $(uptime)
+Load Average: $(cat /proc/loadavg)
+Memory: $(free -h | grep Mem | awk '{print $3 "/" $2 " used"}')
+Disk: $(df -h / | tail -1 | awk '{print $3 "/" $2 " used (" $5 ")"}')
+
+2. LOG STATISTICS (Last 24 hours)
+---------------------------------
+Total messages:    $(journalctl --since "24 hours ago" --no-pager 2>/dev/null | wc -l)
+Error messages:    $(journalctl --since "24 hours ago" -p err --no-pager 2>/dev/null | wc -l)
+Warning messages:  $(journalctl --since "24 hours ago" -p warning --no-pager 2>/dev/null | wc -l)
+Critical messages: $(journalctl --since "24 hours ago" -p crit --no-pager 2>/dev/null | wc -l)
+
+3. SECURITY EVENTS
+------------------
+Failed logins:     $(journalctl --since "24 hours ago" -g "Failed password|authentication failure" 2>/dev/null | wc -l)
+Successful logins: $(journalctl --since "24 hours ago" -g "session opened" 2>/dev/null | wc -l)
+Sudo commands:     $(journalctl _COMM=sudo --since "24 hours ago" 2>/dev/null | wc -l)
+SSH connections:   $(journalctl -u sshd --since "24 hours ago" -g "Accepted" 2>/dev/null | wc -l)
+
+4. SERVICE STATUS
+-----------------
+$(for svc in {{ journal_tools.monitored_services | join(' ') }}; do
+    if systemctl is-active --quiet "$svc" 2>/dev/null; then
+        echo "  [✓] $svc - Running"
+    else
+        echo "  [✗] $svc - Not running"
+    fi
+done)
+
+5. TOP ERROR SOURCES
+--------------------
+$(journalctl --since "24 hours ago" -p err --output=json --no-pager 2>/dev/null | \
+    jq -r '.SYSLOG_IDENTIFIER // ._COMM // "unknown"' 2>/dev/null | \
+    sort | uniq -c | sort -rn | head -5 | \
+    awk '{printf "  %-30s %d errors\n", $2, $1}' || echo "  No errors found")
+
+6. RECENT SECURITY ALERTS
+-------------------------
+$(journalctl --since "24 hours ago" --no-pager -p warning \
+    -g "fail|denied|unauthorized|error" 2>/dev/null | \
+    head -10 || echo "  No security alerts")
+
+7. AUDIT SUMMARY
+----------------
+$(if command -v ausearch &> /dev/null; then
+    echo "Sudoers changes:   $(ausearch -k sudoers_changes --start yesterday 2>/dev/null | grep -c "type=" || echo 0)"
+    echo "Identity changes:  $(ausearch -k identity_changes --start yesterday 2>/dev/null | grep -c "type=" || echo 0)"
+    echo "SSH config changes: $(ausearch -k ssh_config_changes --start yesterday 2>/dev/null | grep -c "type=" || echo 0)"
+else
+    echo "  auditd not installed"
+fi)
+
+8. DISK SPACE WARNINGS
+----------------------
+$(df -h | awk '$5 ~ /[89][0-9]%|100%/ {print "  WARNING: " $1 " is " $5 " full"}' || echo "  No disk space warnings")
+
+9. FAILED SERVICES
+------------------
+$(systemctl --failed --no-pager --no-legend 2>/dev/null | head -5 || echo "  No failed services")
+
+10. RECENT ERRORS (Last 10)
+---------------------------
+$(journalctl --since "24 hours ago" -p err --no-pager 2>/dev/null | tail -10 || echo "  No errors")
+
+================================================================================
+                           END OF REPORT
+================================================================================
+EOF
+}
+
+# Parse arguments
+QUIET=false
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -o|--output) REPORT_FILE="$2"; shift 2 ;;
+        -e|--email) EMAIL_RECIPIENT="$2"; shift 2 ;;
+        -q|--quiet) QUIET=true; shift ;;
+        -h|--help) usage ;;
+        *) echo "Unknown option: $1"; usage ;;
+    esac
+done
+
+# Create report directory
+mkdir -p "$REPORT_DIR"
+
+# Generate report
+REPORT=$(generate_report)
+
+# Save to file
+echo "$REPORT" > "$REPORT_FILE"
+chmod 640 "$REPORT_FILE"
+
+# Print to stdout unless quiet
+if ! $QUIET; then
+    echo "$REPORT"
+fi
+
+# Email report if recipient specified and mail is available
+if [ -n "$EMAIL_RECIPIENT" ] && [ "$EMAIL_RECIPIENT" != "root" ] && command -v mail &> /dev/null; then
+    echo "$REPORT" | mail -s "Daily System Report - $(hostname) - $DATE" "$EMAIL_RECIPIENT"
+fi
+
+# Cleanup old reports (keep 30 days)
+find "$REPORT_DIR" -name "daily_report_*.txt" -mtime +30 -delete 2>/dev/null || true
+
+echo ""
+echo "Report saved to: $REPORT_FILE"
+

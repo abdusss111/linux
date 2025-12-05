@@ -1,0 +1,8 @@
+# Rate limiting configuration for journald
+# Managed by Ansible - SIS6
+
+[Journal]
+# Allow high burst for initial startup
+RateLimitIntervalSec={{ journald_config.rate_limit_interval_sec }}
+RateLimitBurst={{ journald_config.rate_limit_burst }}
+

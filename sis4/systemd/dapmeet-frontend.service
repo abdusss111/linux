@@ -1,0 +1,35 @@
+[Unit]
+Description=Dapmeet Frontend Docker Container
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+TimeoutStartSec=300
+
+# Pre-start cleanup
+ExecStartPre=-/usr/bin/docker stop dapmeet-frontend
+ExecStartPre=-/usr/bin/docker rm dapmeet-frontend
+ExecStartPre=/usr/bin/docker pull abdusss111/dapmeet-client:latest
+
+# Start container
+ExecStart=/usr/bin/docker run --rm --name dapmeet-frontend \
+    -p 3000:3000 \
+    -e NODE_ENV=production \
+    -e NEXT_PUBLIC_API_URL=http://backend:8000 \
+    --health-cmd="curl -f http://localhost:3000/ || exit 1" \
+    --health-interval=30s \
+    --health-timeout=10s \
+    --health-retries=3 \
+    abdusss111/dapmeet-client:latest
+
+# Stop container gracefully
+ExecStop=/usr/bin/docker stop -t 30 dapmeet-frontend
+
+[Install]
+WantedBy=multi-user.target
+
+

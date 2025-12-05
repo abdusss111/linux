@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: journal_tools
+  author: Abdurakhimov Abdussalam
+  description: Journal watching and analysis toolset scripts
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+
+dependencies:
+  - role: journald
+  - role: auditd
+

@@ -1,0 +1,48 @@
+#  This file is part of systemd.
+#  Managed by Ansible - SIS6 Journaling Setup
+#  
+#  See journald.conf(5) for details.
+
+[Journal]
+# Storage configuration
+Storage={{ journald_config.storage }}
+Compress={{ journald_config.compress }}
+Seal={{ journald_config.seal }}
+
+# System journal size limits
+SystemMaxUse={{ journald_config.system_max_use }}
+SystemKeepFree={{ journald_config.system_keep_free }}
+SystemMaxFileSize={{ journald_config.system_max_file_size }}
+SystemMaxFiles={{ journald_config.system_max_files }}
+
+# Runtime (volatile) journal limits
+RuntimeMaxUse={{ journald_config.runtime_max_use }}
+RuntimeKeepFree={{ journald_config.runtime_keep_free }}
+RuntimeMaxFileSize={{ journald_config.runtime_max_file_size }}
+
+# Rate limiting
+RateLimitIntervalSec={{ journald_config.rate_limit_interval_sec }}
+RateLimitBurst={{ journald_config.rate_limit_burst }}
+
+# Forwarding to other systems
+ForwardToSyslog={{ journald_config.forward_to_syslog }}
+ForwardToKMsg={{ journald_config.forward_to_kmsg }}
+ForwardToConsole={{ journald_config.forward_to_console }}
+ForwardToWall={{ journald_config.forward_to_wall }}
+
+# Maximum log level to store/forward
+MaxLevelStore={{ journald_config.max_level_store }}
+MaxLevelSyslog={{ journald_config.max_level_syslog }}
+
+# Split journal by user
+SplitMode=uid
+
+# Audit integration - receive audit messages
+Audit=yes
+
+# TTY path for console output (if enabled)
+#TTYPath=/dev/console
+
+# Line max is set to allow for large log messages
+LineMax=48K
+

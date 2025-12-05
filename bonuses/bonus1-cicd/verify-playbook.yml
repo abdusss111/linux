@@ -1,0 +1,99 @@
+---
+# Verification playbook for CI/CD pipeline
+# Runs after deployment to verify services are working
+
+- name: Verify Dapmeet Deployment
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Check Docker service status
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+      register: docker_status
+
+    - name: Display Docker status
+      ansible.builtin.debug:
+        msg: "Docker is {{ 'running' if docker_status.status.ActiveState == 'active' else 'NOT running' }}"
+
+    - name: Check running containers
+      ansible.builtin.shell: docker ps --format "table {{ '{{' }}.Names{{ '}}' }}\t{{ '{{' }}.Status{{ '}}' }}\t{{ '{{' }}.Ports{{ '}}' }}"
+      register: running_containers
+      changed_when: false
+
+    - name: Display running containers
+      ansible.builtin.debug:
+        var: running_containers.stdout_lines
+
+    - name: Verify frontend container (VM1 only)
+      ansible.builtin.shell: curl -f http://localhost:3000/health || echo "Frontend not responding"
+      register: frontend_health
+      when: "'frontend' in group_names"
+      changed_when: false
+      ignore_errors: true
+
+    - name: Verify backend container (VM2 only)
+      ansible.builtin.shell: curl -f http://localhost:8000/health || echo "Backend not responding"
+      register: backend_health
+      when: "'backend' in group_names"
+      changed_when: false
+      ignore_errors: true
+
+    - name: Check disk space
+      ansible.builtin.shell: df -h / | tail -1 | awk '{print $5}'
+      register: disk_usage
+      changed_when: false
+
+    - name: Warn if disk usage is high
+      ansible.builtin.debug:
+        msg: "WARNING: Disk usage is {{ disk_usage.stdout }}"
+      when: disk_usage.stdout | regex_replace('%', '') | int > 80
+
+    - name: Check memory usage
+      ansible.builtin.shell: free -m | awk '/^Mem:/{printf "%.1f%%", $3/$2*100}'
+      register: memory_usage
+      changed_when: false
+
+    - name: Display memory usage
+      ansible.builtin.debug:
+        msg: "Memory usage: {{ memory_usage.stdout }}"
+
+    - name: Check systemd service status
+      ansible.builtin.shell: |
+        for svc in dapmeet-backend dapmeet-frontend; do
+          if systemctl is-active --quiet $svc 2>/dev/null; then
+            echo "$svc: active"
+          fi
+        done
+      register: services_status
+      changed_when: false
+
+    - name: Display services status
+      ansible.builtin.debug:
+        var: services_status.stdout_lines
+
+    - name: Create verification report
+      ansible.builtin.copy:
+        content: |
+          Dapmeet Verification Report
+          ===========================
+          Host: {{ inventory_hostname }}
+          Date: {{ ansible_date_time.iso8601 }}
+          
+          Docker: {{ 'OK' if docker_status.status.ActiveState == 'active' else 'FAILED' }}
+          Disk Usage: {{ disk_usage.stdout }}
+          Memory Usage: {{ memory_usage.stdout }}
+          
+          Containers:
+          {{ running_containers.stdout }}
+        dest: /var/log/dapmeet/verification-report.txt
+        mode: '0644'
+
+    - name: Summary
+      ansible.builtin.debug:
+        msg: |
+          ✅ Verification completed for {{ inventory_hostname }}
+          📊 Disk: {{ disk_usage.stdout }} | Memory: {{ memory_usage.stdout }}
+

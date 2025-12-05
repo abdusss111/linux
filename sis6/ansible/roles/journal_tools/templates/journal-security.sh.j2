@@ -1,0 +1,258 @@
+#!/bin/bash
+#==============================================================================
+# Script: journal-security.sh
+# Purpose: Monitor security-related events from journal and audit logs
+# Task 2: Journal toolset - Security monitoring
+# Usage: journal-security.sh [OPTIONS]
+#==============================================================================
+
+set -euo pipefail
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
+NC='\033[0m'
+
+SINCE="1 day ago"
+UNTIL="now"
+VERBOSE=false
+
+usage() {
+    cat << EOF
+${CYAN}Security Event Monitor${NC}
+${BLUE}======================${NC}
+
+Usage: $(basename "$0") [OPTIONS]
+
+Options:
+  -s, --since TIME      Start time (default: "1 day ago")
+  -u, --until TIME      End time (default: "now")
+  -v, --verbose         Show detailed output
+  -h, --help            Show this help
+
+Reports:
+  --summary             Security summary (default)
+  --auth                Authentication events
+  --sudo                Sudo usage
+  --ssh                 SSH events
+  --audit               Audit events (from auditd)
+  --failed              Failed operations
+  --privileged          Privileged command usage
+  --all                 All security events
+
+Examples:
+  $(basename "$0") --summary
+  $(basename "$0") --auth -s "2 hours ago"
+  $(basename "$0") --audit --verbose
+  $(basename "$0") --all
+
+EOF
+    exit 0
+}
+
+print_header() {
+    echo ""
+    echo -e "${CYAN}════════════════════════════════════════════════════════════════${NC}"
+    echo -e "${CYAN}  $1${NC}"
+    echo -e "${CYAN}════════════════════════════════════════════════════════════════${NC}"
+}
+
+print_section() {
+    echo ""
+    echo -e "${YELLOW}━━━ $1 ━━━${NC}"
+}
+
+# Authentication events
+show_auth() {
+    print_header "Authentication Events"
+    
+    print_section "Failed Login Attempts"
+    journalctl --since="$SINCE" --until="$UNTIL" --no-pager \
+        -g "Failed password|authentication failure" 2>/dev/null | tail -20 || \
+        echo "  No failed logins found"
+    
+    print_section "Successful Logins"
+    journalctl --since="$SINCE" --until="$UNTIL" --no-pager \
+        -g "session opened|Accepted" 2>/dev/null | tail -20 || \
+        echo "  No successful logins found"
+    
+    print_section "Account Lockouts"
+    journalctl --since="$SINCE" --until="$UNTIL" --no-pager \
+        -g "locked|too many|exceeded" 2>/dev/null | tail -10 || \
+        echo "  No lockouts found"
+}
+
+# Sudo usage
+show_sudo() {
+    print_header "Sudo Usage"
+    
+    print_section "Sudo Commands Executed"
+    journalctl _COMM=sudo --since="$SINCE" --until="$UNTIL" --no-pager \
+        --output=short-iso 2>/dev/null | tail -30 || \
+        echo "  No sudo usage found"
+    
+    print_section "Sudo Failures"
+    journalctl _COMM=sudo --since="$SINCE" --until="$UNTIL" --no-pager \
+        -g "incorrect password|NOT in sudoers" 2>/dev/null || \
+        echo "  No sudo failures found"
+}
+
+# SSH events
+show_ssh() {
+    print_header "SSH Events"
+    
+    print_section "SSH Connections"
+    journalctl -u sshd --since="$SINCE" --until="$UNTIL" --no-pager \
+        -g "Accepted|session" 2>/dev/null | tail -20 || \
+        echo "  No SSH connections found"
+    
+    print_section "SSH Failures"
+    journalctl -u sshd --since="$SINCE" --until="$UNTIL" --no-pager \
+        -g "Failed|Invalid|refused" 2>/dev/null | tail -20 || \
+        echo "  No SSH failures found"
+    
+    print_section "SSH Key Events"
+    journalctl -u sshd --since="$SINCE" --until="$UNTIL" --no-pager \
+        -g "publickey|key" 2>/dev/null | tail -10 || \
+        echo "  No key events found"
+}
+
+# Audit events
+show_audit() {
+    print_header "Audit Events"
+    
+    if ! command -v ausearch &> /dev/null; then
+        echo -e "${RED}auditd not installed${NC}"
+        return
+    fi
+    
+    print_section "Sudoers Changes"
+    ausearch -k sudoers_changes --start today 2>/dev/null | head -30 || \
+        echo "  No sudoers changes found"
+    
+    print_section "Identity Changes (passwd/group)"
+    ausearch -k identity_changes --start today 2>/dev/null | head -20 || \
+        echo "  No identity changes found"
+    
+    print_section "SSH Config Changes"
+    ausearch -k ssh_config_changes --start today 2>/dev/null | head -20 || \
+        echo "  No SSH config changes found"
+    
+    print_section "Privileged Commands"
+    ausearch -k privileged_cmd --start today 2>/dev/null | head -30 || \
+        echo "  No privileged commands found"
+}
+
+# Failed operations
+show_failed() {
+    print_header "Failed Operations"
+    
+    print_section "All Failures"
+    journalctl --since="$SINCE" --until="$UNTIL" --no-pager -p err \
+        -g "fail|error|denied|refused|reject" 2>/dev/null | tail -50 || \
+        echo "  No failures found"
+}
+
+# Privileged commands
+show_privileged() {
+    print_header "Privileged Command Usage"
+    
+    print_section "User Management Commands"
+    journalctl --since="$SINCE" --until="$UNTIL" --no-pager \
+        _COMM=useradd + _COMM=userdel + _COMM=usermod 2>/dev/null | tail -20 || \
+        echo "  No user management found"
+    
+    print_section "Group Management Commands"
+    journalctl --since="$SINCE" --until="$UNTIL" --no-pager \
+        _COMM=groupadd + _COMM=groupdel + _COMM=groupmod 2>/dev/null | tail -20 || \
+        echo "  No group management found"
+}
+
+# Security summary
+show_summary() {
+    print_header "Security Summary Report"
+    echo -e "${BLUE}Time Range: $SINCE - $UNTIL${NC}"
+    
+    print_section "Quick Stats"
+    
+    # Failed logins
+    failed_logins=$(journalctl --since="$SINCE" --until="$UNTIL" \
+        -g "Failed password|authentication failure" 2>/dev/null | wc -l)
+    echo -e "  Failed login attempts:    ${RED}$failed_logins${NC}"
+    
+    # Successful logins
+    success_logins=$(journalctl --since="$SINCE" --until="$UNTIL" \
+        -g "session opened" 2>/dev/null | wc -l)
+    echo -e "  Successful sessions:      ${GREEN}$success_logins${NC}"
+    
+    # Sudo usage
+    sudo_count=$(journalctl _COMM=sudo --since="$SINCE" --until="$UNTIL" 2>/dev/null | wc -l)
+    echo -e "  Sudo commands:            ${YELLOW}$sudo_count${NC}"
+    
+    # SSH connections
+    ssh_count=$(journalctl -u sshd --since="$SINCE" --until="$UNTIL" \
+        -g "Accepted" 2>/dev/null | wc -l)
+    echo -e "  SSH connections:          ${CYAN}$ssh_count${NC}"
+    
+    # Errors
+    error_count=$(journalctl --since="$SINCE" --until="$UNTIL" -p err 2>/dev/null | wc -l)
+    echo -e "  Error messages:           ${RED}$error_count${NC}"
+    
+    print_section "Recent Security Events"
+    journalctl --since="$SINCE" --until="$UNTIL" --no-pager \
+        -p warning \
+        -g "fail|error|denied|refused|unauthorized|invalid" 2>/dev/null | \
+        tail -15 || echo "  No recent security events"
+    
+    if command -v ausearch &> /dev/null; then
+        print_section "Recent Audit Alerts"
+        ausearch -k sudoers_changes -k identity_changes --start today 2>/dev/null | \
+            tail -10 || echo "  No audit alerts"
+    fi
+}
+
+# Show all
+show_all() {
+    show_summary
+    show_auth
+    show_sudo
+    show_ssh
+    show_audit
+    show_privileged
+}
+
+# Parse arguments
+ACTION="summary"
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -s|--since) SINCE="$2"; shift 2 ;;
+        -u|--until) UNTIL="$2"; shift 2 ;;
+        -v|--verbose) VERBOSE=true; shift ;;
+        -h|--help) usage ;;
+        --summary) ACTION="summary"; shift ;;
+        --auth) ACTION="auth"; shift ;;
+        --sudo) ACTION="sudo"; shift ;;
+        --ssh) ACTION="ssh"; shift ;;
+        --audit) ACTION="audit"; shift ;;
+        --failed) ACTION="failed"; shift ;;
+        --privileged) ACTION="privileged"; shift ;;
+        --all) ACTION="all"; shift ;;
+        *) echo "Unknown option: $1"; usage ;;
+    esac
+done
+
+case $ACTION in
+    summary) show_summary ;;
+    auth) show_auth ;;
+    sudo) show_sudo ;;
+    ssh) show_ssh ;;
+    audit) show_audit ;;
+    failed) show_failed ;;
+    privileged) show_privileged ;;
+    all) show_all ;;
+esac
+

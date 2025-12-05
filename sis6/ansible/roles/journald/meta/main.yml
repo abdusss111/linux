@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  role_name: journald
+  author: Abdurakhimov Abdussalam
+  description: Configure systemd-journald for comprehensive logging
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+
+dependencies: []
+

@@ -1,0 +1,80 @@
+---
+# Scheduled Ansible Maintenance Workflow
+# Runs maintenance tasks periodically
+
+name: Scheduled Maintenance
+
+on:
+  schedule:
+    # Run every Sunday at 2 AM UTC
+    - cron: '0 2 * * 0'
+  workflow_dispatch:
+    inputs:
+      maintenance_task:
+        description: 'Maintenance task to run'
+        required: true
+        type: choice
+        options:
+          - security-updates
+          - backup-verification
+          - health-check
+          - log-rotation
+
+env:
+  ANSIBLE_FORCE_COLOR: '1'
+  ANSIBLE_HOST_KEY_CHECKING: 'false'
+
+jobs:
+  maintenance:
+    name: Run Maintenance Tasks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Ansible
+        run: |
+          pip install ansible
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ANSIBLE_SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.VM1_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+          ssh-keyscan -H ${{ secrets.VM2_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: Run Health Check
+        if: github.event.inputs.maintenance_task == 'health-check' || github.event_name == 'schedule'
+        run: |
+          cd sis5/ansible
+          ansible all -i inventory/hosts.yml -m ping
+          ansible all -i inventory/hosts.yml -m shell -a "systemctl is-active docker"
+          ansible all -i inventory/hosts.yml -m shell -a "df -h / | tail -1"
+
+      - name: Run Security Updates
+        if: github.event.inputs.maintenance_task == 'security-updates'
+        run: |
+          cd sis5/ansible
+          ansible all -i inventory/hosts.yml -m apt -a "upgrade=safe update_cache=yes" --become
+
+      - name: Verify Backups
+        if: github.event.inputs.maintenance_task == 'backup-verification' || github.event_name == 'schedule'
+        run: |
+          cd sis5/ansible
+          ansible backend -i inventory/hosts.yml -m shell -a "ls -la /var/backups/dapmeet/postgresql/ | tail -5" --become
+
+      - name: Rotate Logs
+        if: github.event.inputs.maintenance_task == 'log-rotation'
+        run: |
+          cd sis5/ansible
+          ansible all -i inventory/hosts.yml -m shell -a "logrotate -f /etc/logrotate.conf" --become
+

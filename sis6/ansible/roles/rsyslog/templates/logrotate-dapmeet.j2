@@ -1,0 +1,32 @@
+# Logrotate configuration for Dapmeet logs
+# Managed by Ansible - SIS6
+
+{{ project_logs }}/*.log {
+    daily
+    missingok
+    rotate {{ journal_tools.retention_days }}
+    compress
+    delaycompress
+    notifempty
+    create 0640 root adm
+    sharedscripts
+    postrotate
+        /usr/lib/rsyslog/rsyslog-rotate
+    endscript
+}
+
+{{ project_logs }}/security.log
+{{ project_logs }}/auth_failures.log {
+    daily
+    missingok
+    rotate 90
+    compress
+    delaycompress
+    notifempty
+    create 0600 root root
+    sharedscripts
+    postrotate
+        /usr/lib/rsyslog/rsyslog-rotate
+    endscript
+}
+

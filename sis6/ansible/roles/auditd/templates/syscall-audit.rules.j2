@@ -1,0 +1,68 @@
+## System Call Audit Rules
+## Managed by Ansible - SIS6
+
+# ============================================================================
+# KERNEL MODULE OPERATIONS
+# ============================================================================
+
+# Monitor kernel module loading/unloading
+-a always,exit -F arch=b64 -S init_module -S finit_module -k kernel_modules
+-a always,exit -F arch=b32 -S init_module -S finit_module -k kernel_modules
+
+-a always,exit -F arch=b64 -S delete_module -k kernel_modules
+-a always,exit -F arch=b32 -S delete_module -k kernel_modules
+
+# Monitor insmod, rmmod, modprobe
+-w /sbin/insmod -p x -k kernel_modules
+-w /sbin/rmmod -p x -k kernel_modules
+-w /sbin/modprobe -p x -k kernel_modules
+
+# ============================================================================
+# FILE DELETION AND RENAMING
+# ============================================================================
+
+# Monitor file deletion by users
+-a always,exit -F arch=b64 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k file_deletion
+-a always,exit -F arch=b32 -S unlink -S unlinkat -S rename -S renameat -F auid>=1000 -F auid!=4294967295 -k file_deletion
+
+# ============================================================================
+# MOUNT OPERATIONS
+# ============================================================================
+
+# Monitor mount/unmount operations
+-a always,exit -F arch=b64 -S mount -S umount2 -F auid>=1000 -F auid!=4294967295 -k mount_operations
+-a always,exit -F arch=b32 -S mount -S umount -S umount2 -F auid>=1000 -F auid!=4294967295 -k mount_operations
+
+# ============================================================================
+# NETWORK CONFIGURATION
+# ============================================================================
+
+# Monitor network configuration changes
+-w /etc/hosts -p wa -k network_changes
+-w /etc/hostname -p wa -k network_changes
+-w /etc/network -p wa -k network_changes
+-w /etc/netplan -p wa -k network_changes
+-w /etc/resolv.conf -p wa -k network_changes
+
+# Monitor iptables/nftables changes
+-w /etc/iptables -p wa -k firewall_changes
+-w /etc/nftables.conf -p wa -k firewall_changes
+
+# ============================================================================
+# TIME CHANGES
+# ============================================================================
+
+# Monitor time changes (important for log integrity)
+-a always,exit -F arch=b64 -S adjtimex -S settimeofday -S clock_settime -k time_changes
+-a always,exit -F arch=b32 -S adjtimex -S settimeofday -S clock_settime -k time_changes
+
+# Monitor chrony/ntp configuration
+-w /etc/chrony -p wa -k time_changes
+-w /etc/ntp.conf -p wa -k time_changes
+
+# ============================================================================
+# MAKE RULES IMMUTABLE (must be last rule)
+# ============================================================================
+# Uncomment to make rules immutable (requires reboot to change)
+# -e 2
+

@@ -1,0 +1,50 @@
+#==============================================================================
+# Example Terraform Variables File
+# Copy this file to terraform.tfvars and fill in your values
+#==============================================================================
+
+# Yandex Cloud Authentication
+# Get your token from: https://oauth.yandex.ru/authorize?response_type=token&client_id=1a6990aa636648e9b2ef855fa7bec2fb
+yc_token     = "YOUR_OAUTH_TOKEN_HERE"
+yc_cloud_id  = "YOUR_CLOUD_ID_HERE"
+yc_folder_id = "YOUR_FOLDER_ID_HERE"
+yc_zone      = "ru-central1-a"
+
+# Project Configuration
+project_name = "dapmeet"
+environment  = "dev"  # dev, staging, or production
+timezone     = "Asia/Almaty"
+
+# Network Configuration
+subnet_cidr = "10.128.0.0/24"
+ssh_allowed_ips = ["YOUR_IP/32"]  # Restrict to your IP for security
+# ssh_allowed_ips = ["0.0.0.0/0"]  # Allow from anywhere (less secure)
+
+# VM Configuration - Frontend
+frontend_cores  = 2
+frontend_memory = 2
+
+# VM Configuration - Backend
+backend_cores  = 2
+backend_memory = 4
+
+# Common VM Configuration
+vm_disk_size     = 20
+vm_core_fraction = 20      # 5, 20, 50, or 100
+use_preemptible  = true    # Set to false for production
+
+# SSH Configuration
+ssh_user            = "automation"
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
+
+# Database
+db_password = "YourSecurePasswordHere!"
+
+# DNS (optional)
+create_dns_records = false
+# dns_zone_id      = "YOUR_DNS_ZONE_ID"
+# domain_name      = "dapmeet.yourdomain.com"
+
+# Static IP (optional)
+reserve_static_ip = false
+

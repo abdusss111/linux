@@ -1,0 +1,12 @@
+---
+- name: Restart auditd
+  ansible.builtin.service:
+    name: auditd
+    state: restarted
+  # Note: auditd may need special handling as it doesn't restart cleanly with systemd
+
+- name: Reload audit rules
+  ansible.builtin.command: augenrules --load
+  register: reload_result
+  changed_when: "'No change' not in reload_result.stdout"
+

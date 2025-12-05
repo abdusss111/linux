@@ -1,0 +1,60 @@
+#  /etc/rsyslog.conf
+#  Managed by Ansible - SIS6 Journaling Setup
+#
+#  For more information see rsyslog.conf(5) and https://www.rsyslog.com/
+
+#################
+#### MODULES ####
+#################
+
+module(load="imuxsock")    # provides support for local system logging
+module(load="imklog")      # provides kernel logging support
+module(load="imjournal"    # provides access to systemd journal
+       StateFile="imjournal.state"
+       IgnorePreviousMessages="off"
+       Ratelimit.Interval="600"
+       Ratelimit.Burst="20000")
+
+###########################
+#### GLOBAL DIRECTIVES ####
+###########################
+
+# Use traditional timestamp format
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+# Filter duplicate messages
+$RepeatedMsgReduction on
+
+# Set the default permissions for all log files
+$FileOwner root
+$FileGroup adm
+$FileCreateMode 0640
+$DirCreateMode 0755
+$Umask 0022
+
+# Where to place spool and state files
+$WorkDirectory /var/spool/rsyslog
+
+# Include all config files in /etc/rsyslog.d/
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+###############
+#### RULES ####
+###############
+
+# First some standard log files
+auth,authpriv.*                 /var/log/auth.log
+*.*;auth,authpriv.none          -/var/log/syslog
+cron.*                          /var/log/cron.log
+daemon.*                        -/var/log/daemon.log
+kern.*                          -/var/log/kern.log
+lpr.*                           -/var/log/lpr.log
+mail.*                          -/var/log/mail.log
+user.*                          -/var/log/user.log
+
+# Emergency messages to all logged-in users
+*.emerg                         :omusrmsg:*
+
+# Log everything to a catch-all file (optional, useful for debugging)
+# *.*                           -/var/log/messages
+

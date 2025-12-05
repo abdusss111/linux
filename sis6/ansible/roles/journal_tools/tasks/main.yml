@@ -1,0 +1,87 @@
+---
+# Role: journal_tools
+# Purpose: Install journal watching and analysis scripts
+# Task 2: Creating a toolset of journalling
+
+- name: Create scripts directory
+  ansible.builtin.file:
+    path: "{{ scripts_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Install journal search script
+  ansible.builtin.template:
+    src: journal-search.sh.j2
+    dest: "{{ scripts_dir }}/journal-search.sh"
+    mode: '0755'
+
+- name: Install service filter script
+  ansible.builtin.template:
+    src: journal-services.sh.j2
+    dest: "{{ scripts_dir }}/journal-services.sh"
+    mode: '0755'
+
+- name: Install security monitor script
+  ansible.builtin.template:
+    src: journal-security.sh.j2
+    dest: "{{ scripts_dir }}/journal-security.sh"
+    mode: '0755'
+
+- name: Install audit search script
+  ansible.builtin.template:
+    src: audit-search.sh.j2
+    dest: "{{ scripts_dir }}/audit-search.sh"
+    mode: '0755'
+
+- name: Install log analyzer script
+  ansible.builtin.template:
+    src: log-analyzer.sh.j2
+    dest: "{{ scripts_dir }}/log-analyzer.sh"
+    mode: '0755'
+
+- name: Install real-time monitor script
+  ansible.builtin.template:
+    src: journal-monitor.sh.j2
+    dest: "{{ scripts_dir }}/journal-monitor.sh"
+    mode: '0755'
+
+- name: Install daily report script
+  ansible.builtin.template:
+    src: daily-report.sh.j2
+    dest: "{{ scripts_dir }}/daily-report.sh"
+    mode: '0755'
+
+- name: Create symlinks in /usr/local/bin
+  ansible.builtin.file:
+    src: "{{ scripts_dir }}/{{ item }}"
+    dest: "/usr/local/bin/{{ item | replace('.sh', '') }}"
+    state: link
+  loop:
+    - journal-search.sh
+    - journal-services.sh
+    - journal-security.sh
+    - audit-search.sh
+    - log-analyzer.sh
+    - journal-monitor.sh
+    - daily-report.sh
+
+- name: Create cron job for daily report
+  ansible.builtin.cron:
+    name: "Daily journal report"
+    minute: "0"
+    hour: "7"
+    job: "{{ scripts_dir }}/daily-report.sh > /dev/null 2>&1"
+    user: root
+
+- name: Display tool installation summary
+  ansible.builtin.debug:
+    msg: |
+      Journal Toolset installed at {{ scripts_dir }}:
+      - journal-search: Search patterns in journal logs
+      - journal-services: Filter and monitor services
+      - journal-security: Security event monitoring
+      - audit-search: Search audit logs
+      - log-analyzer: Analyze log patterns
+      - journal-monitor: Real-time monitoring
+      - daily-report: Generate daily reports
+

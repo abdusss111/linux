@@ -1,0 +1,40 @@
+[Unit]
+Description=Dapmeet Backend Docker Container
+Requires=docker.service
+After=docker.service network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+TimeoutStartSec=300
+
+# Pre-start cleanup
+ExecStartPre=-/usr/bin/docker stop dapmeet-backend
+ExecStartPre=-/usr/bin/docker rm dapmeet-backend
+ExecStartPre=/usr/bin/docker pull abdusss111/dapmeet-service:latest
+
+# Start container with environment configuration
+ExecStart=/usr/bin/docker run --rm --name dapmeet-backend \
+    -p 8000:8000 \
+    -e PYTHONUNBUFFERED=1 \
+    -e DATABASE_URL=postgresql://dapmeet:dapmeet_password@host.docker.internal:5432/dapmeet \
+    -e REDIS_URL=redis://host.docker.internal:6379/0 \
+    -e SECRET_KEY=your-secret-key-here \
+    -v /var/dapmeet/processing:/app/processing \
+    -v /var/log/dapmeet:/app/logs \
+    --add-host=host.docker.internal:host-gateway \
+    --health-cmd="curl -f http://localhost:8000/health || exit 1" \
+    --health-interval=30s \
+    --health-timeout=10s \
+    --health-retries=3 \
+    abdusss111/dapmeet-service:latest
+
+# Stop container gracefully
+ExecStop=/usr/bin/docker stop -t 30 dapmeet-backend
+
+[Install]
+WantedBy=multi-user.target
+
+

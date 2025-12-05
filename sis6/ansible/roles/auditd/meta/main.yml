@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: auditd
+  author: Abdurakhimov Abdussalam
+  description: Configure Linux Audit System for security monitoring
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+
+dependencies: []
+

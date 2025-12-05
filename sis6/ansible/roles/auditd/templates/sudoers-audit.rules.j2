@@ -1,0 +1,40 @@
+## Sudoers Audit Rules - Task 3 Requirement
+## Managed by Ansible - SIS6
+## 
+## Alert on security-sensitive actions like changing sudoers
+
+# ============================================================================
+# SUDOERS MONITORING (Primary Task 3 Requirement)
+# ============================================================================
+
+# Monitor main sudoers file for any changes
+-w /etc/sudoers -p wa -k sudoers_changes
+
+# Monitor sudoers.d directory for any changes
+-w /etc/sudoers.d -p wa -k sudoers_changes
+
+# Monitor visudo command usage
+-w /usr/sbin/visudo -p x -k sudoers_edit
+
+# ============================================================================
+# SUDO COMMAND EXECUTION
+# ============================================================================
+
+# Log all sudo command executions
+-a always,exit -F path=/usr/bin/sudo -F perm=x -F auid>=1000 -F auid!=4294967295 -k sudo_usage
+
+# Monitor su command usage
+-a always,exit -F path=/usr/bin/su -F perm=x -F auid>=1000 -F auid!=4294967295 -k su_usage
+
+# ============================================================================
+# PRIVILEGE ESCALATION ATTEMPTS
+# ============================================================================
+
+# Monitor setuid/setgid changes
+-a always,exit -F arch=b64 -S setuid -S setgid -S setreuid -S setregid -k privilege_escalation
+-a always,exit -F arch=b32 -S setuid -S setgid -S setreuid -S setregid -k privilege_escalation
+
+# Monitor capability changes
+-a always,exit -F arch=b64 -S capset -k capability_changes
+-a always,exit -F arch=b32 -S capset -k capability_changes
+

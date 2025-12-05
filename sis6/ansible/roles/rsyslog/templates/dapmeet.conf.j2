@@ -1,0 +1,34 @@
+# /etc/rsyslog.d/50-dapmeet.conf
+# Dapmeet application logging configuration
+# Managed by Ansible - SIS6
+
+# Template for application logs with detailed timestamp
+template(name="DapmeetLogFormat" type="list") {
+    property(name="timestamp" dateFormat="rfc3339")
+    constant(value=" [")
+    property(name="syslogseverity-text")
+    constant(value="] ")
+    property(name="hostname")
+    constant(value=" ")
+    property(name="programname")
+    constant(value=": ")
+    property(name="msg" droplastlf="on")
+    constant(value="\n")
+}
+
+{% for log in rsyslog_config.log_files %}
+# {{ log.description }}
+{{ log.facility }}.*    {{ log.file }};DapmeetLogFormat
+{% endfor %}
+
+# Docker container logs (if using syslog driver)
+if $programname startswith 'dapmeet' then {
+    action(type="omfile" file="{{ project_logs }}/app.log" template="DapmeetLogFormat")
+    stop
+}
+
+# Nginx logs integration
+if $programname == 'nginx' then {
+    action(type="omfile" file="{{ project_logs }}/nginx.log" template="DapmeetLogFormat")
+}
+

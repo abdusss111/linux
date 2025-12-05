@@ -1,0 +1,98 @@
+---
+# SIS6 - Main Playbook: Journaling and Auditing Setup
+# This playbook configures systemd-journald, rsyslog, and auditd
+
+- name: Setup Journaling and Auditing Infrastructure
+  hosts: all
+  become: true
+  gather_facts: true
+
+  pre_tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+      tags: [always]
+
+    - name: Install required packages
+      ansible.builtin.apt:
+        name:
+          - systemd
+          - rsyslog
+          - auditd
+          - audispd-plugins
+          - logrotate
+          - jq
+          - bc
+        state: present
+      tags: [packages]
+
+    - name: Create project directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ project_logs }}"
+        - "{{ project_config }}"
+        - "{{ scripts_dir }}"
+      tags: [directories]
+
+  roles:
+    # Task 1: Configure journald for comprehensive logging
+    - role: journald
+      tags: [journald, logging]
+
+    # Task 1: Configure rsyslog integration
+    - role: rsyslog
+      tags: [rsyslog, logging]
+
+    # Task 3: Configure auditd for security events
+    - role: auditd
+      tags: [auditd, security]
+
+    # Task 2: Install journal toolset scripts
+    - role: journal_tools
+      tags: [tools, scripts]
+
+  post_tasks:
+    - name: Verify journald is running
+      ansible.builtin.systemd:
+        name: systemd-journald
+        state: started
+        enabled: true
+      tags: [verify]
+
+    - name: Verify rsyslog is running
+      ansible.builtin.systemd:
+        name: rsyslog
+        state: started
+        enabled: true
+      tags: [verify]
+
+    - name: Verify auditd is running
+      ansible.builtin.systemd:
+        name: auditd
+        state: started
+        enabled: true
+      tags: [verify]
+
+    - name: Display completion message
+      ansible.builtin.debug:
+        msg: |
+          SIS6 Journaling & Auditing setup completed on {{ inventory_hostname }}!
+          
+          Services configured:
+          - systemd-journald (persistent logging)
+          - rsyslog (log forwarding)
+          - auditd (security auditing)
+          
+          Tools installed at: {{ scripts_dir }}
+          
+          Quick commands:
+          - View all logs: journalctl -f
+          - View service logs: journalctl -u <service> -f
+          - Search audit logs: ausearch -k sudoers_changes
+          - Use toolset: {{ scripts_dir }}/journal-search.sh
+      tags: [always]
+

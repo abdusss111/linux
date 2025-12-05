@@ -1,0 +1,104 @@
+---
+# Role: auditd
+# Purpose: Configure Linux Audit System for security monitoring
+# Task 3: Setting up auditing events for security-sensitive actions
+
+- name: Ensure auditd packages are installed
+  ansible.builtin.apt:
+    name:
+      - auditd
+      - audispd-plugins
+    state: present
+
+- name: Configure auditd daemon
+  ansible.builtin.template:
+    src: auditd.conf.j2
+    dest: /etc/audit/auditd.conf
+    owner: root
+    group: root
+    mode: '0640'
+    backup: yes
+  notify: Restart auditd
+
+- name: Configure audit rules
+  ansible.builtin.template:
+    src: audit.rules.j2
+    dest: /etc/audit/rules.d/dapmeet.rules
+    owner: root
+    group: root
+    mode: '0640'
+  notify: Reload audit rules
+
+- name: Configure sudoers audit rules (Task 3 requirement)
+  ansible.builtin.template:
+    src: sudoers-audit.rules.j2
+    dest: /etc/audit/rules.d/10-sudoers.rules
+    owner: root
+    group: root
+    mode: '0640'
+  notify: Reload audit rules
+
+- name: Configure identity management audit rules
+  ansible.builtin.template:
+    src: identity-audit.rules.j2
+    dest: /etc/audit/rules.d/20-identity.rules
+    owner: root
+    group: root
+    mode: '0640'
+  notify: Reload audit rules
+
+- name: Configure privileged command audit rules
+  ansible.builtin.template:
+    src: privileged-audit.rules.j2
+    dest: /etc/audit/rules.d/30-privileged.rules
+    owner: root
+    group: root
+    mode: '0640'
+  notify: Reload audit rules
+
+- name: Configure system call audit rules
+  ansible.builtin.template:
+    src: syscall-audit.rules.j2
+    dest: /etc/audit/rules.d/40-syscalls.rules
+    owner: root
+    group: root
+    mode: '0640'
+  notify: Reload audit rules
+
+- name: Configure audit log dispatcher
+  ansible.builtin.template:
+    src: audisp-syslog.conf.j2
+    dest: /etc/audisp/plugins.d/syslog.conf
+    mode: '0640'
+  notify: Restart auditd
+  ignore_errors: yes
+
+- name: Ensure audit log directory exists
+  ansible.builtin.file:
+    path: /var/log/audit
+    state: directory
+    owner: root
+    group: root
+    mode: '0750'
+
+- name: Enable auditd at boot
+  ansible.builtin.systemd:
+    name: auditd
+    enabled: true
+    state: started
+
+- name: Load audit rules
+  ansible.builtin.command: augenrules --load
+  register: augenrules_result
+  changed_when: "'No change' not in augenrules_result.stdout"
+  failed_when: false
+
+- name: Verify audit rules are loaded
+  ansible.builtin.command: auditctl -l
+  register: audit_rules
+  changed_when: false
+
+- name: Display loaded audit rules count
+  ansible.builtin.debug:
+    msg: "Loaded {{ audit_rules.stdout_lines | length }} audit rules"
+

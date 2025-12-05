@@ -1,0 +1,35 @@
+## Dapmeet Audit Rules
+## Managed by Ansible - SIS6
+## 
+## This file contains audit rules specific to the Dapmeet application
+
+# Delete all existing rules (clean start)
+-D
+
+# Set buffer size
+-b {{ auditd_config.buffer_size }}
+
+# Set failure mode (0=silent, 1=printk, 2=panic)
+-f {{ auditd_config.failure_mode }}
+
+# Set backlog limit
+--backlog_limit {{ auditd_config.backlog_limit }}
+
+# ============================================================================
+# Dapmeet Application Specific Rules
+# ============================================================================
+
+{% for watch in audit_rules.file_watches %}
+{% if watch.path.startswith(project_config) or watch.path.startswith(project_base) %}
+# {{ watch.key }}: Monitor {{ watch.path }}
+-w {{ watch.path }} -p {{ watch.permissions }} -k {{ watch.key }}
+{% endif %}
+{% endfor %}
+
+# Monitor dapmeet service files
+-w /etc/systemd/system/dapmeet-frontend.service -p wa -k dapmeet_service_changes
+-w /etc/systemd/system/dapmeet-backend.service -p wa -k dapmeet_service_changes
+
+# Monitor dapmeet log directory
+-w {{ project_logs }} -p wa -k dapmeet_log_access
+
