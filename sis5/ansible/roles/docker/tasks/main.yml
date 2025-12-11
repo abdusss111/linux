@@ -2,71 +2,21 @@
 # Role: docker
 # Purpose: Install Docker and pull images as defined in SIS4
 
-- name: Remove existing Docker repository files
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: absent
-  loop:
-    - /etc/apt/sources.list.d/docker.list
-    - /etc/apt/sources.list.d/docker.list.save
-    - /etc/apt/sources.list.d/docker.list.bak
-  failed_when: false
-  tags: [docker]
 
-- name: Remove conflicting Docker keyrings
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: absent
-  loop:
-    - /etc/apt/keyrings/docker.asc
-    - /usr/share/keyrings/docker-archive-keyring.gpg
-    - /usr/share/keyrings/docker-archive-keyring.gpg.old
-  failed_when: false
-  tags: [docker]
 
-- name: Clean Docker entries from sources.list if exists
-  ansible.builtin.replace:
-    path: /etc/apt/sources.list
-    regexp: '.*docker.*'
-    replace: ''
-    backup: yes
-  failed_when: false
-  tags: [docker]
 
-- name: Configure apt to ignore SSL errors (temporary workaround)
-  ansible.builtin.copy:
-    content: |
-      Acquire::https::Verify-Peer "false";
-      Acquire::https::Verify-Host "false";
-    dest: /etc/apt/apt.conf.d/99insecure
-    mode: '0644'
-  tags: [docker]
 
-- name: Clean broken apt cache files
-  ansible.builtin.shell: |
-    rm -rf /var/lib/apt/lists/*
-    rm -f /var/lib/apt/lists/lock
-    rm -f /var/cache/apt/archives/lock
-  failed_when: false
-  tags: [docker]
 
-- name: Update apt cache after cleanup
-  ansible.builtin.apt:
-    update_cache: true
-  tags: [docker]
 
-- name: Reinstall ca-certificates
-  ansible.builtin.apt:
-    name: ca-certificates
-    state: latest
-    update_cache: yes
-  tags: [docker]
 
-- name: Remove temporary insecure apt config
-  ansible.builtin.file:
-    path: /etc/apt/apt.conf.d/99insecure
-    state: absent
-  tags: [docker]
+
+
+
+
+
+
+
+
 
 - name: Install required packages for Docker
   ansible.builtin.apt:
@@ -76,6 +26,7 @@
       - curl
       - gnupg
       - lsb-release
+    state: present
     state: present
     update_cache: false
   tags: [docker]

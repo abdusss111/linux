@@ -37,9 +37,9 @@
     uid: "{{ item.uid }}"
     group: "{{ item.group }}"
     groups: "{{ item.groups | default([]) | join(',') }}"
-    shell: "{{ item.shell }}"
+    shell: "{{ item.shell | default(omit) }}"
     home: "{{ item.home }}"
-    comment: "{{ item.comment }}"
+    comment: "{{ item.comment | default(omit) }}"
     system: "{{ item.system | default(false) }}"
     create_home: "{{ not item.system | default(true) }}"
     state: present
