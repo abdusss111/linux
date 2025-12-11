@@ -18,10 +18,8 @@ vm_users:
     uid: 114
     group: postgres
     groups: []
-    shell: /bin/bash
     system: true
     home: /var/lib/postgresql
-    comment: "PostgreSQL database service"
 
   - name: dapmeet-backend
     uid: 1002
