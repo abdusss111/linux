@@ -1,5 +1,6 @@
 # Use Node.js v23.11.0 to match your environment
-FROM node:23.11.0-alpine AS base
+# Explicitly specify platform for linux/amd64 compatibility
+FROM --platform=linux/amd64 node:23.11.0-alpine AS base
 
 # Set working directory
 WORKDIR /app

@@ -27,7 +27,7 @@
     port: "{{ item.port }}"
     proto: "{{ item.proto }}"
     comment: "{{ item.comment }}"
-  loop: "{{ firewall_ports }}"
+  loop: "{{ firewall_ports | default([]) }}"
   tags: [firewall]
 
 - name: Allow SSH from specific networks (internal)

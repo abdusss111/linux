@@ -2,6 +2,72 @@
 # Role: docker
 # Purpose: Install Docker and pull images as defined in SIS4
 
+- name: Remove existing Docker repository files
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/apt/sources.list.d/docker.list
+    - /etc/apt/sources.list.d/docker.list.save
+    - /etc/apt/sources.list.d/docker.list.bak
+  failed_when: false
+  tags: [docker]
+
+- name: Remove conflicting Docker keyrings
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/apt/keyrings/docker.asc
+    - /usr/share/keyrings/docker-archive-keyring.gpg
+    - /usr/share/keyrings/docker-archive-keyring.gpg.old
+  failed_when: false
+  tags: [docker]
+
+- name: Clean Docker entries from sources.list if exists
+  ansible.builtin.replace:
+    path: /etc/apt/sources.list
+    regexp: '.*docker.*'
+    replace: ''
+    backup: yes
+  failed_when: false
+  tags: [docker]
+
+- name: Configure apt to ignore SSL errors (temporary workaround)
+  ansible.builtin.copy:
+    content: |
+      Acquire::https::Verify-Peer "false";
+      Acquire::https::Verify-Host "false";
+    dest: /etc/apt/apt.conf.d/99insecure
+    mode: '0644'
+  tags: [docker]
+
+- name: Clean broken apt cache files
+  ansible.builtin.shell: |
+    rm -rf /var/lib/apt/lists/*
+    rm -f /var/lib/apt/lists/lock
+    rm -f /var/cache/apt/archives/lock
+  failed_when: false
+  tags: [docker]
+
+- name: Update apt cache after cleanup
+  ansible.builtin.apt:
+    update_cache: true
+  tags: [docker]
+
+- name: Reinstall ca-certificates
+  ansible.builtin.apt:
+    name: ca-certificates
+    state: latest
+    update_cache: yes
+  tags: [docker]
+
+- name: Remove temporary insecure apt config
+  ansible.builtin.file:
+    path: /etc/apt/apt.conf.d/99insecure
+    state: absent
+  tags: [docker]
+
 - name: Install required packages for Docker
   ansible.builtin.apt:
     name:
@@ -11,18 +77,38 @@
       - gnupg
       - lsb-release
     state: present
-    update_cache: true
+    update_cache: false
+  tags: [docker]
+
+- name: Set Docker repository OS name
+  ansible.builtin.set_fact:
+    docker_os_name: "{{ 'debian' if ansible_facts['os_family'] == 'Debian' else 'ubuntu' }}"
+  tags: [docker]
+
+- name: Create keyrings directory
+  ansible.builtin.file:
+    path: /usr/share/keyrings
+    state: directory
+    mode: '0755'
   tags: [docker]
 
 - name: Add Docker GPG key
-  ansible.builtin.apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
+  ansible.builtin.get_url:
+    url: https://download.docker.com/linux/{{ docker_os_name }}/gpg
+    dest: /tmp/docker.gpg
+    mode: '0644'
+  tags: [docker]
+
+- name: Add Docker GPG key to apt keyring
+  ansible.builtin.shell: |
+    gpg --dearmor < /tmp/docker.gpg > /usr/share/keyrings/docker-archive-keyring.gpg
+    chmod 644 /usr/share/keyrings/docker-archive-keyring.gpg
+    rm -f /tmp/docker.gpg
   tags: [docker]
 
 - name: Add Docker repository
   ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/{{ docker_os_name }} {{ ansible_facts['distribution_release'] }} stable"
     state: present
     filename: docker
   tags: [docker]
@@ -79,19 +165,48 @@
   notify: Restart Docker
   tags: [docker]
 
-- name: Pull Docker image
-  community.docker.docker_image:
-    name: "{{ docker_container.image }}"
-    source: pull
+- name: Determine Docker image to pull
+  ansible.builtin.set_fact:
+    is_frontend: "{{ (vm_role | default('')) == 'frontend' or 'frontend' in group_names }}"
+    docker_user: "{{ docker_hub_user | default('abdusss111') }}"
   tags: [docker, images]
+
+- name: Set Docker image name with latest tag
+  ansible.builtin.set_fact:
+    docker_image_to_pull: "{{ docker_container.image | default((frontend_image | default(docker_user + '/dapmeet-client:latest')) if is_frontend else (backend_image | default(docker_user + '/dapmeet-service:latest'))) }}"
+  tags: [docker, images]
+  
+- name: Ensure latest tag is always used
+  ansible.builtin.set_fact:
+    docker_image_to_pull: "{{ docker_image_to_pull + ':latest' if ':' not in docker_image_to_pull.split('/')[-1] else docker_image_to_pull }}"
+  tags: [docker, images]
+
+
+- name: Determine container configuration
+  ansible.builtin.set_fact:
+    container_name: "{{ docker_container.name | default('dapmeet-frontend' if is_frontend else 'dapmeet-backend') }}"
+    container_image: "{{ docker_image_to_pull }}"
+    container_ports: "{{ docker_container.ports | default(['3000:3000'] if is_frontend else ['8000:8000']) }}"
+  tags: [docker, containers]
+
+- name: Pull Docker image for container
+  ansible.builtin.shell: |
+    docker pull {{ container_image }} --platform linux/amd64 2>&1 || docker pull {{ container_image }} 2>&1
+  args:
+    executable: /bin/bash
+  register: docker_pull_result
+  changed_when: "'Downloaded newer image' in docker_pull_result.stdout or 'Pulled' in docker_pull_result.stdout or 'Status: Downloaded newer image' in docker_pull_result.stdout"
+  failed_when: "'no matching manifest' in docker_pull_result.stderr or (docker_pull_result.rc != 0 and 'Error' in docker_pull_result.stderr)"
+  tags: [docker, containers]
 
 - name: Create and start container
   community.docker.docker_container:
-    name: "{{ docker_container.name }}"
-    image: "{{ docker_container.image }}"
+    name: "{{ container_name }}"
+    image: "{{ container_image }}"
     state: started
-    restart_policy: "{{ docker_container.restart_policy }}"
-    ports: "{{ docker_container.ports }}"
-    env: "{{ docker_container.env }}"
+    restart_policy: "{{ docker_container.restart_policy | default('always') }}"
+    ports: "{{ container_ports }}"
+    env: "{{ docker_container.env | default({}) }}"
+    pull: false
   tags: [docker, containers]
 

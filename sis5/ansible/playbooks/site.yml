@@ -29,8 +29,8 @@
       tags: [common]
 
     - name: Set timezone
-      ansible.builtin.timezone:
-        name: "{{ timezone }}"
+      community.general.timezone:
+        name: "{{ timezone | default('UTC') }}"
       tags: [common]
 
   roles:
@@ -59,12 +59,19 @@
       tags: [sis4, cron]
 
   post_tasks:
+    - name: Set VM role for display
+      ansible.builtin.set_fact:
+        display_vm_role: "{{ vm_role | default('frontend' if 'frontend' in group_names else 'backend') }}"
+        display_container_name: "{{ docker_container.name | default('dapmeet-frontend' if ('frontend' in group_names or (vm_role | default('')) == 'frontend') else 'dapmeet-backend') }}"
+        display_container_ports: "{{ docker_container.ports | default(['3000:3000'] if ('frontend' in group_names or (vm_role | default('')) == 'frontend') else ['8000:8000']) }}"
+      tags: [always]
+
     - name: Display setup completion message
       ansible.builtin.debug:
         msg: |
           Dapmeet setup completed on {{ inventory_hostname }}!
-          VM Role: {{ vm_role }}
-          Docker Container: {{ docker_container.name }}
-          Container Ports: {{ docker_container.ports | join(', ') }}
+          VM Role: {{ display_vm_role }}
+          Docker Container: {{ display_container_name }}
+          Container Ports: {{ display_container_ports | join(', ') }}
       tags: [always]
 

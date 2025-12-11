@@ -9,12 +9,12 @@
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
-  loop: "{{ vm_directories }}"
+  loop: "{{ vm_directories | default([]) }}"
   tags: [permissions, directories]
 
 - name: Create scripts directory
   ansible.builtin.file:
-    path: "{{ project_base }}/scripts"
+    path: "{{ project_base | default('/opt/dapmeet') }}/scripts"
     state: directory
     owner: root
     group: dapmeet
@@ -32,7 +32,7 @@
 
 - name: Protect .env files if they exist
   ansible.builtin.file:
-    path: "{{ project_base }}/{{ vm_role }}/.env"
+    path: "{{ project_base | default('/opt/dapmeet') }}/{{ vm_role | default('frontend' if 'frontend' in group_names else 'backend') }}/.env"
     mode: "0600"
   failed_when: false
   changed_when: false
@@ -62,7 +62,7 @@
     group: root
     mode: "0440"
     validate: /usr/sbin/visudo -cf %s
-  loop: "{{ sudoers_rules }}"
+  loop: "{{ sudoers_rules | default([]) }}"
   tags: [permissions, sudo]
 
 - name: Ensure sudoers includes sudoers.d

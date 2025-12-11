@@ -4,7 +4,7 @@
 
 set -e
 
-LOG_DIR="{{ project_logs }}"
+LOG_DIR="{{ project_logs | default('/var/log/dapmeet') }}"
 MAX_SIZE=100M
 ROTATE_COUNT=5
 

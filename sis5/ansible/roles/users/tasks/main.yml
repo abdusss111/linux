@@ -7,7 +7,7 @@
     name: "{{ item.name }}"
     gid: "{{ item.gid }}"
     state: present
-  loop: "{{ common_groups }}"
+  loop: "{{ common_groups | default([]) }}"
   tags: [users, groups]
 
 - name: Create VM-specific groups
@@ -15,7 +15,7 @@
     name: "{{ item.name }}"
     gid: "{{ item.gid }}"
     state: present
-  loop: "{{ vm_groups }}"
+  loop: "{{ vm_groups | default([]) }}"
   tags: [users, groups]
 
 - name: Create sysadmin group
@@ -43,7 +43,7 @@
     system: "{{ item.system | default(false) }}"
     create_home: "{{ not item.system | default(true) }}"
     state: present
-  loop: "{{ vm_users }}"
+  loop: "{{ vm_users | default([]) }}"
   tags: [users]
 
 - name: Set up SSH directory for users with SSH access
@@ -60,6 +60,6 @@
 - name: Display created users
   ansible.builtin.debug:
     msg: "Created user: {{ item.name }} ({{ item.comment }})"
-  loop: "{{ vm_users }}"
+  loop: "{{ vm_users | default([]) }}"
   tags: [users]
 

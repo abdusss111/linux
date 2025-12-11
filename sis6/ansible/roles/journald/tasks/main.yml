@@ -73,3 +73,4 @@
   ansible.builtin.debug:
     msg: "Journal verification: {{ 'PASS' if journal_verify.rc == 0 else 'NEEDS ATTENTION' }}"
 
+

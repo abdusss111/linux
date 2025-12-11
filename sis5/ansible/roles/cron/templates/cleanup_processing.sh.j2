@@ -4,7 +4,7 @@
 
 set -e
 
-PROCESSING_DIR="{{ project_data }}/processing"
+PROCESSING_DIR="{{ project_data | default('/var/dapmeet') }}/processing"
 DAYS_OLD=3
 
 # Remove processing files older than specified days

@@ -4,8 +4,8 @@
 
 set -e
 
-SSL_DIR="{{ project_config }}/ssl"
-DOMAIN="{{ domain_name }}"
+SSL_DIR="{{ project_config | default('/etc/dapmeet') }}/ssl"
+DOMAIN="{{ domain_name | default('dapmeet.local') }}"
 DAYS_WARNING=30
 
 if [ -f "$SSL_DIR/fullchain.pem" ]; then

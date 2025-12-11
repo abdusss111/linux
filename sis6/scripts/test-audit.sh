@@ -147,3 +147,4 @@ echo ""
 echo "Generate audit report:"
 echo -e "  ${YELLOW}aureport --summary${NC}"
 
+

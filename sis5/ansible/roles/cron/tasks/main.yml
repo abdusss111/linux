@@ -18,7 +18,7 @@
 - name: Deploy maintenance scripts
   ansible.builtin.template:
     src: "{{ item }}.j2"
-    dest: "{{ project_base }}/scripts/{{ item }}"
+    dest: "{{ project_base | default('/opt/dapmeet') }}/scripts/{{ item }}"
     mode: "0755"
     owner: root
     group: dapmeet
@@ -42,6 +42,6 @@
     weekday: "{{ item.weekday | default('*') }}"
     user: "{{ item.user }}"
     state: present
-  loop: "{{ cron_jobs }}"
+  loop: "{{ cron_jobs | default([]) }}"
   tags: [cron]
 

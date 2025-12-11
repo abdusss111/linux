@@ -68,9 +68,9 @@
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: '^#?AllowUsers'
-    line: "AllowUsers {{ vm_users | selectattr('ssh_key', 'defined') | selectattr('ssh_key', 'equalto', true) | map(attribute='name') | join(' ') }}"
+    line: "AllowUsers {{ (vm_users | default([]) | selectattr('ssh_key', 'defined') | selectattr('ssh_key', 'equalto', true) | map(attribute='name') | list | join(' ')) | default('') }}"
   notify: Restart SSH
-  when: vm_users | selectattr('ssh_key', 'defined') | selectattr('ssh_key', 'equalto', true) | list | length > 0
+  when: (vm_users | default([]) | selectattr('ssh_key', 'defined') | selectattr('ssh_key', 'equalto', true) | list | length) > 0
   tags: [ssh, security]
 
 - name: Deploy SSH public keys for automation user

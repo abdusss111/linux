@@ -4,7 +4,7 @@
 
 set -e
 
-BACKUP_DIR="{{ project_backups }}/postgresql"
+BACKUP_DIR="{{ project_backups | default('/var/backups/dapmeet') }}/postgresql"
 DATE=$(date +%Y%m%d_%H%M%S)
 BACKUP_FILE="$BACKUP_DIR/dapmeet_$DATE.sql.gz"
 

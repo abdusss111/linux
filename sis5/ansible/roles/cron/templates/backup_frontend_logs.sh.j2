@@ -4,8 +4,8 @@
 
 set -e
 
-BACKUP_DIR="{{ project_backups }}/logs"
-LOG_DIR="{{ project_logs }}"
+BACKUP_DIR="{{ project_backups | default('/var/backups/dapmeet') }}/logs"
+LOG_DIR="{{ project_logs | default('/var/log/dapmeet') }}"
 DATE=$(date +%Y%m%d)
 
 mkdir -p "$BACKUP_DIR"

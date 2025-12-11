@@ -1,5 +1,5 @@
 [Unit]
-Description={{ docker_container.name }} Docker Container
+Description={{ service_container_name | default('dapmeet-container') }} Docker Container
 Requires=docker.service
 After=docker.service network-online.target
 Wants=network-online.target
@@ -8,18 +8,18 @@ Wants=network-online.target
 Type=simple
 Restart=always
 RestartSec=10
-ExecStartPre=-/usr/bin/docker stop {{ docker_container.name }}
-ExecStartPre=-/usr/bin/docker rm {{ docker_container.name }}
-ExecStartPre=/usr/bin/docker pull {{ docker_container.image }}
-ExecStart=/usr/bin/docker run --rm --name {{ docker_container.name }} \
-{% for port in docker_container.ports %}
+ExecStartPre=-/usr/bin/docker stop {{ service_container_name | default('dapmeet-container') }}
+ExecStartPre=-/usr/bin/docker rm {{ service_container_name | default('dapmeet-container') }}
+ExecStartPre=/usr/bin/docker pull {{ service_container_image | default('abdusss111/dapmeet-service:latest') }}
+ExecStart=/usr/bin/docker run --rm --name {{ service_container_name | default('dapmeet-container') }} \
+{% for port in (service_container_ports | default(['8000:8000'])) %}
     -p {{ port }} \
 {% endfor %}
-{% for key, value in docker_container.env.items() %}
+{% for key, value in (service_container_env | default({})).items() %}
     -e {{ key }}={{ value }} \
 {% endfor %}
-    {{ docker_container.image }}
-ExecStop=/usr/bin/docker stop {{ docker_container.name }}
+    {{ service_container_image | default('abdusss111/dapmeet-service:latest') }}
+ExecStop=/usr/bin/docker stop {{ service_container_name | default('dapmeet-container') }}
 
 [Install]
 WantedBy=multi-user.target
