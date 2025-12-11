@@ -14,12 +14,7 @@ vm_groups:
 
 # Users specific to VM2
 vm_users:
-  - name: postgres
-    uid: 114
-    group: postgres
-    groups: []
-    system: true
-    home: /var/lib/postgresql
+
 
   - name: dapmeet-backend
     uid: 1002
