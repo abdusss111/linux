@@ -19,7 +19,11 @@
         msg: "Docker is {{ 'running' if docker_status.status.ActiveState == 'active' else 'NOT running' }}"
 
     - name: Check running containers
-      ansible.builtin.shell: docker ps --format "table {{ '{{' }}.Names{{ '}}' }}\t{{ '{{' }}.Status{{ '}}' }}\t{{ '{{' }}.Ports{{ '}}' }}"
+      ansible.builtin.shell: |
+        set -o pipefail
+        docker ps --format "table {{ '{{' }}.Names{{ '}}' }}\t{{ '{{' }}.Status{{ '}}' }}\t{{ '{{' }}.Ports{{ '}}' }}"
+      args:
+        executable: /bin/bash
       register: running_containers
       changed_when: false
 
@@ -28,21 +32,27 @@
         var: running_containers.stdout_lines
 
     - name: Verify frontend container (VM1 only)
-      ansible.builtin.shell: curl -f http://localhost:3000/health || echo "Frontend not responding"
+      ansible.builtin.uri:
+        url: http://localhost:3000/health
+        return_content: false
       register: frontend_health
       when: "'frontend' in group_names"
-      changed_when: false
       ignore_errors: true
 
     - name: Verify backend container (VM2 only)
-      ansible.builtin.shell: curl -f http://localhost:8000/health || echo "Backend not responding"
+      ansible.builtin.uri:
+        url: http://localhost:8000/health
+        return_content: false
       register: backend_health
       when: "'backend' in group_names"
-      changed_when: false
       ignore_errors: true
 
     - name: Check disk space
-      ansible.builtin.shell: df -h / | tail -1 | awk '{print $5}'
+      ansible.builtin.shell: |
+        set -o pipefail
+        df -h / | tail -1 | awk '{print $5}'
+      args:
+        executable: /bin/bash
       register: disk_usage
       changed_when: false
 
@@ -52,7 +62,11 @@
       when: disk_usage.stdout | regex_replace('%', '') | int > 80
 
     - name: Check memory usage
-      ansible.builtin.shell: free -m | awk '/^Mem:/{printf "%.1f%%", $3/$2*100}'
+      ansible.builtin.shell: |
+        set -o pipefail
+        free -m | awk '/^Mem:/{printf "%.1f%%", $3/$2*100}'
+      args:
+        executable: /bin/bash
       register: memory_usage
       changed_when: false
 
@@ -81,11 +95,11 @@
           ===========================
           Host: {{ inventory_hostname }}
           Date: {{ ansible_date_time.iso8601 }}
-          
+
           Docker: {{ 'OK' if docker_status.status.ActiveState == 'active' else 'FAILED' }}
           Disk Usage: {{ disk_usage.stdout }}
           Memory Usage: {{ memory_usage.stdout }}
-          
+
           Containers:
           {{ running_containers.stdout }}
         dest: /var/log/dapmeet/verification-report.txt
@@ -96,4 +110,3 @@
         msg: |
           ✅ Verification completed for {{ inventory_hostname }}
           📊 Disk: {{ disk_usage.stdout }} | Memory: {{ memory_usage.stdout }}
-

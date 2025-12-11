@@ -5,13 +5,20 @@
 - name: Determine container service configuration
   ansible.builtin.set_fact:
     service_container_name: "{{ container_name | default(docker_container.name | default('dapmeet-frontend' if ('frontend' in group_names or (vm_role | default('')) == 'frontend') else 'dapmeet-backend')) }}"
-    is_frontend_role: "{{ 'frontend' in group_names or (vm_role | default('')) == 'frontend' }}"
+    is_frontend_role: >-
+      {{ 'frontend' in group_names or (vm_role | default('')) == 'frontend' }}
     default_hub_user: "{{ docker_hub_user | default('abdusss111') }}"
 
 - name: Determine container image
   ansible.builtin.set_fact:
-    service_container_image: "{{ container_image | default(docker_container.image | default(frontend_image | default(default_hub_user ~ '/dapmeet-client:latest') if is_frontend_role else backend_image | default(default_hub_user ~ '/dapmeet-service:latest'))) }}"
-    service_container_ports: "{{ container_ports | default(docker_container.ports | default(['3000:3000'] if is_frontend_role else ['8000:8000'])) }}"
+    service_container_image: >-
+      {{ container_image | default(docker_container.image | default(frontend_image
+      | default(default_hub_user ~ '/dapmeet-client:latest') if is_frontend_role
+      else backend_image | default(default_hub_user ~
+      '/dapmeet-service:latest'))) }}
+    service_container_ports: >-
+      {{ container_ports | default(docker_container.ports | default(['3000:3000']
+      if is_frontend_role else ['8000:8000'])) }}
     service_container_env: "{{ docker_container.env | default({}) }}"
   tags: [services, systemd]
 
@@ -37,4 +44,3 @@
     name: "{{ service_container_name }}"
     state: started
   tags: [services, systemd]
-

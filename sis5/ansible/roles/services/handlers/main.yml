@@ -2,9 +2,13 @@
 - name: Reload systemd
   ansible.builtin.systemd:
     daemon_reload: true
-
 - name: Restart container service
   ansible.builtin.systemd:
-    name: "{{ service_container_name | default(container_name | default(docker_container.name | default('dapmeet-frontend' if ('frontend' in group_names or (vm_role | default('')) == 'frontend') else 'dapmeet-backend'))) }}"
+    name: >-
+      {{ service_container_name | default(container_name |
+      default(docker_container.name | default('dapmeet-frontend' if ('frontend'
+      in group_names or (vm_role | default('')) == 'frontend') else
+      'dapmeet-backend'))) }}
     state: restarted
+
 

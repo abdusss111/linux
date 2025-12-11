@@ -173,30 +173,44 @@
 
 - name: Set Docker image name with latest tag
   ansible.builtin.set_fact:
-    docker_image_to_pull: "{{ docker_container.image | default((frontend_image | default(docker_user + '/dapmeet-client:latest')) if is_frontend else (backend_image | default(docker_user + '/dapmeet-service:latest'))) }}"
-  tags: [docker, images]
-  
-- name: Ensure latest tag is always used
-  ansible.builtin.set_fact:
-    docker_image_to_pull: "{{ docker_image_to_pull + ':latest' if ':' not in docker_image_to_pull.split('/')[-1] else docker_image_to_pull }}"
+    docker_image_to_pull: >-
+      {{ docker_container.image | default((frontend_image | default(docker_user +
+      '/dapmeet-client:latest')) if is_frontend else (backend_image |
+      default(docker_user + '/dapmeet-service:latest'))) }}
   tags: [docker, images]
 
+- name: Ensure latest tag is always used
+  ansible.builtin.set_fact:
+    docker_image_to_pull: >-
+      {{ docker_image_to_pull + ':latest' if ':' not in
+      docker_image_to_pull.split('/')[-1] else docker_image_to_pull }}
+  tags: [docker, images]
 
 - name: Determine container configuration
   ansible.builtin.set_fact:
-    container_name: "{{ docker_container.name | default('dapmeet-frontend' if is_frontend else 'dapmeet-backend') }}"
+    container_name: >-
+      {{ docker_container.name | default('dapmeet-frontend' if is_frontend else
+      'dapmeet-backend') }}
     container_image: "{{ docker_image_to_pull }}"
-    container_ports: "{{ docker_container.ports | default(['3000:3000'] if is_frontend else ['8000:8000']) }}"
+    container_ports: >-
+      {{ docker_container.ports | default(['3000:3000'] if is_frontend else
+      ['8000:8000']) }}
   tags: [docker, containers]
 
 - name: Pull Docker image for container
   ansible.builtin.shell: |
-    docker pull {{ container_image }} --platform linux/amd64 2>&1 || docker pull {{ container_image }} 2>&1
+    docker pull {{ container_image }} --platform linux/amd64 2>&1 || \
+    docker pull {{ container_image }} 2>&1
   args:
     executable: /bin/bash
   register: docker_pull_result
-  changed_when: "'Downloaded newer image' in docker_pull_result.stdout or 'Pulled' in docker_pull_result.stdout or 'Status: Downloaded newer image' in docker_pull_result.stdout"
-  failed_when: "'no matching manifest' in docker_pull_result.stderr or (docker_pull_result.rc != 0 and 'Error' in docker_pull_result.stderr)"
+  changed_when: >-
+    'Downloaded newer image' in docker_pull_result.stdout or
+    'Pulled' in docker_pull_result.stdout or
+    'Status: Downloaded newer image' in docker_pull_result.stdout
+  failed_when: >-
+    'no matching manifest' in docker_pull_result.stderr or
+    (docker_pull_result.rc != 0 and 'Error' in docker_pull_result.stderr)
   tags: [docker, containers]
 
 - name: Create and start container
@@ -209,4 +223,3 @@
     env: "{{ docker_container.env | default({}) }}"
     pull: false
   tags: [docker, containers]
-

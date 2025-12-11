@@ -62,8 +62,14 @@
     - name: Set VM role for display
       ansible.builtin.set_fact:
         display_vm_role: "{{ vm_role | default('frontend' if 'frontend' in group_names else 'backend') }}"
-        display_container_name: "{{ docker_container.name | default('dapmeet-frontend' if ('frontend' in group_names or (vm_role | default('')) == 'frontend') else 'dapmeet-backend') }}"
-        display_container_ports: "{{ docker_container.ports | default(['3000:3000'] if ('frontend' in group_names or (vm_role | default('')) == 'frontend') else ['8000:8000']) }}"
+        display_container_name: >-
+          {{ docker_container.name | default('dapmeet-frontend' if
+          ('frontend' in group_names or (vm_role | default('')) == 'frontend')
+          else 'dapmeet-backend') }}
+        display_container_ports: >-
+          {{ docker_container.ports | default(['3000:3000'] if
+          ('frontend' in group_names or (vm_role | default('')) == 'frontend')
+          else ['8000:8000']) }}
       tags: [always]
 
     - name: Display setup completion message
@@ -74,4 +80,3 @@
           Docker Container: {{ display_container_name }}
           Container Ports: {{ display_container_ports | join(', ') }}
       tags: [always]
-
